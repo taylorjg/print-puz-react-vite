@@ -1,7 +1,3 @@
 export const App = () => {
-  return (
-    <div>
-      TODO
-    </div>
-  )
-}
+  return <div>TODO</div>;
+};
