@@ -6,7 +6,9 @@ export const App = () => {
   return (
     <div>
       <div>Hello from App</div>
-      <Link to={"/page2"} state={{ url }}>Page 2</Link>
+      <Link to={"/page2"} state={{ url }}>
+        Page 2
+      </Link>
     </div>
   );
 };
