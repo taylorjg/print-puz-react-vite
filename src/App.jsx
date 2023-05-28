@@ -1,3 +1,12 @@
+import { Link } from "react-router-dom";
+
 export const App = () => {
-  return <div>Hello from App</div>;
+  const url = "https://news.bbc.co.uk";
+
+  return (
+    <div>
+      <div>Hello from App</div>
+      <Link to={"/page2"} state={{ url }}>Page 2</Link>
+    </div>
+  );
 };
