@@ -9,6 +9,7 @@ module.exports = {
     "plugin:react-hooks/recommended",
     "prettier",
     "plugin:prettier/recommended",
+    "vitest",
   ],
   parserOptions: { ecmaVersion: "latest", sourceType: "module" },
   settings: { react: { version: "18.2" } },
