@@ -8,7 +8,21 @@ const myRender = () => {
   return render(<RouterProvider router={router} />);
 };
 
-test("basic App test", () => {
+test("App page renders", () => {
   myRender();
   expect(screen.getByText("Hello from App")).toBeInTheDocument();
+});
+
+test("App page displays the current puzzle url", async () => {
+  myRender();
+  expect(
+    await screen.findByDisplayValue("mock-current-puzzle-url")
+  ).toBeInTheDocument();
+});
+
+test("App page displays the first of the list of puzzle urls", async () => {
+  myRender();
+  expect(
+    await screen.findByDisplayValue("mock-puzzle-url-1")
+  ).toBeInTheDocument();
 });
