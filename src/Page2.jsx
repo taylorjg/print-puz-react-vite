@@ -13,7 +13,7 @@ export const Page2 = () => {
       setParsedPuzzle(result);
     };
     parsePuzzleAsync();
-  }, []);
+  }, [state?.puzzleUrl]);
 
   return (
     <div>
