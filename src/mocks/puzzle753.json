@@ -1,0 +1,248 @@
+{
+  "puzzleUrl": "https://www.private-eye.co.uk/pictures/crossword/download/753.puz",
+  "puzzle": {
+    "solution": "DDDDDDDD.DDDDDD.D.D.D.D.D.D.D.DDDDDD.DDDDDDDD.D.D.D.D.D.D.D.DDDDDDDDDD.DDDD...D.D.D...D.D..DDDDDDD.DDDDDD.D...D...D...D.DDDDDD.DDDDDDD..D.D...D.D.D...DDDD.DDDDDDDDDD.D.D.D.D.D.D.D.DDDDDDDD.DDDDDD.D.D.D.D.D.D.D.DDDDDD.DDDDDDDD",
+    "state": "--------.------.-.-.-.-.-.-.-.------.--------.-.-.-.-.-.-.-.----------.----...-.-.-...-.-..-------.------.-...-...-...-.------.-------..-.-...-.-.-...----.----------.-.-.-.-.-.-.-.--------.------.-.-.-.-.-.-.-.------.--------",
+    "title": "Eye 753/1598",
+    "author": "Cyclops",
+    "copyright": "",
+    "width": 15,
+    "height": 15,
+    "clues": [
+      "Political clique welcomes back boozer who'd have you for breakfast? (8)",
+      "When to write \"natural vibrator\" (5)",
+      "A game call: \"Donald not wanted!\" (2-5)",
+      "Pompous politician gets in nevertheless, having debts (9)",
+      "Russian neighbour's valiant \"Out!\" (7)",
+      "Ice-like, son puts on make-up (6)",
+      "Toff's bulge (5)",
+      "Awareness of popular view (7)",
+      "Getting nothing out of group therapy, a politician's punishing situation (9)",
+      "Phlegmatic material raises return by corporation? (6)",
+      "Hear about a sure disaster  Hunt's responsibility (8)",
+      "(& 14ac.) River Test court case much in evidence in the public sector now (10)",
+      "Gravedigger's leader on strike  charming! (4)",
+      "Old man goes against the grain  polished off in cinema? (7)",
+      "Backing Buchanan and DeSantis to get on? (9)",
+      "see 11ac. (6)",
+      "Kinky 'Estuary' sex involved belt-tightening (9)",
+      "Philosophical discipline about to get into terrible shite (6)",
+      "One who doesn't share your belief? Fellow should be pushed into working in deli! (7)",
+      "So Biden possibly forgets name, having yen to ignore command (7)",
+      "Trifling type of Democrat gets fitter on pocketing a billion (7)",
+      "Prone to retirement, party all but stuffed (7)",
+      "Rex's ejaculation with two balls   loud (4)",
+      "Survive BSE after turning inflammatory (10)",
+      "Corbyn and Barclay finally united behind tabloid, that's clear (5)",
+      "A world in which even USA disposes of borders (5)",
+      "Comedian Nial mistaken for church dignitary (8)",
+      "Child cooler has crinkled tin covering (6)",
+      "Well, I never drop ecstasy in demo (6)",
+      "One with cavalier attitude, Wood has an agenda (8)"
+    ],
+    "note": "",
+    "hasState": false,
+    "sections": []
+  },
+  "grid": [
+    "........X......",
+    "X.X.X.X.X.X.X.X",
+    "......X........",
+    "X.X.X.X.X.X.X.X",
+    "..........X....",
+    "XXX.X.X.XXX.X.X",
+    "X.......X......",
+    "X.XXX.XXX.XXX.X",
+    "......X.......X",
+    "X.X.XXX.X.X.XXX",
+    "....X..........",
+    "X.X.X.X.X.X.X.X",
+    "........X......",
+    "X.X.X.X.X.X.X.X",
+    "......X........"
+  ],
+  "acrossClues": [
+    {
+      "rowIndex": 0,
+      "colIndex": 0,
+      "clueNumber": 1,
+      "clue": "Political clique welcomes back boozer who'd have you for breakfast? (8)"
+    },
+    {
+      "rowIndex": 0,
+      "colIndex": 9,
+      "clueNumber": 6,
+      "clue": "Ice-like, son puts on make-up (6)"
+    },
+    {
+      "rowIndex": 2,
+      "colIndex": 0,
+      "clueNumber": 9,
+      "clue": "Phlegmatic material raises return by corporation? (6)"
+    },
+    {
+      "rowIndex": 2,
+      "colIndex": 7,
+      "clueNumber": 10,
+      "clue": "Hear about a sure disaster  Hunt's responsibility (8)"
+    },
+    {
+      "rowIndex": 4,
+      "colIndex": 0,
+      "clueNumber": 11,
+      "clue": "(& 14ac.) River Test court case much in evidence in the public sector now (10)"
+    },
+    {
+      "rowIndex": 4,
+      "colIndex": 11,
+      "clueNumber": 12,
+      "clue": "Gravedigger's leader on strike  charming! (4)"
+    },
+    {
+      "rowIndex": 6,
+      "colIndex": 1,
+      "clueNumber": 13,
+      "clue": "Old man goes against the grain  polished off in cinema? (7)"
+    },
+    {
+      "rowIndex": 6,
+      "colIndex": 9,
+      "clueNumber": 14,
+      "clue": "see 11ac. (6)"
+    },
+    {
+      "rowIndex": 8,
+      "colIndex": 0,
+      "clueNumber": 15,
+      "clue": "Philosophical discipline about to get into terrible shite (6)"
+    },
+    {
+      "rowIndex": 8,
+      "colIndex": 7,
+      "clueNumber": 17,
+      "clue": "So Biden possibly forgets name, having yen to ignore command (7)"
+    },
+    {
+      "rowIndex": 10,
+      "colIndex": 0,
+      "clueNumber": 19,
+      "clue": "Rex's ejaculation with two balls   loud (4)"
+    },
+    {
+      "rowIndex": 10,
+      "colIndex": 5,
+      "clueNumber": 20,
+      "clue": "Survive BSE after turning inflammatory (10)"
+    },
+    {
+      "rowIndex": 12,
+      "colIndex": 0,
+      "clueNumber": 22,
+      "clue": "Comedian Nial mistaken for church dignitary (8)"
+    },
+    {
+      "rowIndex": 12,
+      "colIndex": 9,
+      "clueNumber": 23,
+      "clue": "Child cooler has crinkled tin covering (6)"
+    },
+    {
+      "rowIndex": 14,
+      "colIndex": 0,
+      "clueNumber": 24,
+      "clue": "Well, I never drop ecstasy in demo (6)"
+    },
+    {
+      "rowIndex": 14,
+      "colIndex": 7,
+      "clueNumber": 25,
+      "clue": "One with cavalier attitude, Wood has an agenda (8)"
+    }
+  ],
+  "downClues": [
+    {
+      "rowIndex": 0,
+      "colIndex": 1,
+      "clueNumber": 2,
+      "clue": "When to write \"natural vibrator\" (5)"
+    },
+    {
+      "rowIndex": 0,
+      "colIndex": 3,
+      "clueNumber": 3,
+      "clue": "A game call: \"Donald not wanted!\" (2-5)"
+    },
+    {
+      "rowIndex": 0,
+      "colIndex": 5,
+      "clueNumber": 4,
+      "clue": "Pompous politician gets in nevertheless, having debts (9)"
+    },
+    {
+      "rowIndex": 0,
+      "colIndex": 7,
+      "clueNumber": 5,
+      "clue": "Russian neighbour's valiant \"Out!\" (7)"
+    },
+    {
+      "rowIndex": 0,
+      "colIndex": 9,
+      "clueNumber": 6,
+      "clue": "Toff's bulge (5)"
+    },
+    {
+      "rowIndex": 0,
+      "colIndex": 11,
+      "clueNumber": 7,
+      "clue": "Awareness of popular view (7)"
+    },
+    {
+      "rowIndex": 0,
+      "colIndex": 13,
+      "clueNumber": 8,
+      "clue": "Getting nothing out of group therapy, a politician's punishing situation (9)"
+    },
+    {
+      "rowIndex": 6,
+      "colIndex": 1,
+      "clueNumber": 13,
+      "clue": "Backing Buchanan and DeSantis to get on? (9)"
+    },
+    {
+      "rowIndex": 6,
+      "colIndex": 9,
+      "clueNumber": 14,
+      "clue": "Kinky 'Estuary' sex involved belt-tightening (9)"
+    },
+    {
+      "rowIndex": 8,
+      "colIndex": 3,
+      "clueNumber": 16,
+      "clue": "One who doesn't share your belief? Fellow should be pushed into working in deli! (7)"
+    },
+    {
+      "rowIndex": 8,
+      "colIndex": 7,
+      "clueNumber": 17,
+      "clue": "Trifling type of Democrat gets fitter on pocketing a billion (7)"
+    },
+    {
+      "rowIndex": 8,
+      "colIndex": 11,
+      "clueNumber": 18,
+      "clue": "Prone to retirement, party all but stuffed (7)"
+    },
+    {
+      "rowIndex": 10,
+      "colIndex": 5,
+      "clueNumber": 20,
+      "clue": "Corbyn and Barclay finally united behind tabloid, that's clear (5)"
+    },
+    {
+      "rowIndex": 10,
+      "colIndex": 13,
+      "clueNumber": 21,
+      "clue": "A world in which even USA disposes of borders (5)"
+    }
+  ]
+}

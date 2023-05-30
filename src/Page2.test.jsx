@@ -2,11 +2,11 @@ import { render, screen } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import { Page2 } from "./Page2";
 
-const myRender = (initialRoute = "/page2", initialState) => {
+const myRender = (initialState) => {
   const routes = [{ path: "/page2", element: <Page2 /> }];
   const initialEntries = [
     {
-      pathname: initialRoute,
+      pathname: "/page2",
       state: initialState,
     },
   ];
@@ -15,7 +15,11 @@ const myRender = (initialRoute = "/page2", initialState) => {
   return render(<RouterProvider router={router} />);
 };
 
-test("basic Page2 test", () => {
-  myRender();
-  expect(screen.getByText("Page 2")).toBeInTheDocument();
+test("Puzzle page displays title and author in header", async () => {
+  myRender({
+    puzzleUrl:
+      "https://www.private-eye.co.uk/pictures/crossword/download/753.puz",
+  });
+  expect(await screen.findByText("Eye 753/1598")).toBeInTheDocument();
+  expect(await screen.findByText("Cyclops")).toBeInTheDocument();
 });
