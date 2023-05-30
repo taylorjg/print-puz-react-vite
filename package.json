@@ -1,5 +1,6 @@
 {
   "name": "print-puz-react-vite",
+  "description": "TODO: add print-puz-react-vite description",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -8,7 +9,10 @@
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "deploy": "gh-pages -d dist",
+    "predeploy": "npm run build",
+    "open": "open https://taylorjg.github.io/print-puz-react-vite"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",
@@ -33,6 +37,7 @@
     "eslint-plugin-react-refresh": "^0.3.4",
     "eslint-plugin-vitest": "^0.2.5",
     "eslint-plugin-vitest-globals": "^1.3.1",
+    "gh-pages": "^5.0.0",
     "jsdom": "^22.1.0",
     "msw": "^1.2.1",
     "prettier": "^2.8.8",
