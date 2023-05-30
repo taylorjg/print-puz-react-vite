@@ -143,6 +143,76 @@ export const Page2 = () => {
           </tr>
         </tbody>
       </table>
+
+      <br />
+
+      <table
+        border="0"
+        width="650"
+        style={{ backgroundColor: "#ffffff" }}
+        cellPadding="0"
+        cellSpacing="0"
+      >
+        <tbody>
+          <tr valign="top">
+            <td width="20">&nbsp;</td>
+            <td width="290">
+              <font face="arial,helvetica" size="2">
+                <b>Across</b>
+              </font>
+              <br />
+              <table>
+                <tbody>
+                  {(parsedPuzzle?.acrossClues ?? []).map((clue) => (
+                    <tr key={`across-${clue.clueNumber}`}>
+                      <td valign="top">
+                        <b>
+                          <font face="arial,helvetica" size="2">
+                            {clue.clueNumber}
+                          </font>
+                        </b>
+                      </td>
+                      <td width="85%">
+                        <font face="arial,helvetica" size="2">
+                          <span>{clue.clue}</span>
+                        </font>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </td>
+            <td width="30">&nbsp;</td>
+            <td width="290">
+              <font face="arial,helvetica" size="2">
+                <b>Down</b>
+              </font>
+              <br />
+              <table>
+                <tbody>
+                  {(parsedPuzzle?.downClues ?? []).map((clue) => (
+                    <tr key={`across-${clue.clueNumber}`}>
+                      <td valign="top">
+                        <b>
+                          <font face="arial,helvetica" size="2">
+                            {clue.clueNumber}
+                          </font>
+                        </b>
+                      </td>
+                      <td width="85%">
+                        <font face="arial,helvetica" size="2">
+                          <span>{clue.clue}</span>
+                        </font>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </td>
+            <td width="20">&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };
