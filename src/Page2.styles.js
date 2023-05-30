@@ -1,5 +1,12 @@
 import styled from "@emotion/styled";
 
+export const StyledTable = styled.table`
+  border-collapse: collapse;
+  & td {
+    padding: 0;
+  }
+`;
+
 export const StyledClueType = styled.span`
   font-family: arial, helvetica;
   font-size: 10pt;

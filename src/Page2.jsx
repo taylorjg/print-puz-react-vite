@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { parsePuzzle } from "./serverless";
-import { StyledClue, StyledClueNumber, StyledClueType } from "./Page2.styles";
+import {
+  StyledClue,
+  StyledClueNumber,
+  StyledClueType,
+  StyledTable,
+} from "./Page2.styles";
 import * as U from "./utils";
 
 const findClueNumber = (parsedPuzzle, row, col) => {
@@ -68,13 +73,7 @@ export const Page2 = () => {
 
   return (
     <div>
-      <table
-        border="0"
-        width="650"
-        style={{ backgroundColor: "#000000" }}
-        cellPadding="0"
-        cellSpacing="0"
-      >
+      <StyledTable width="650" style={{ backgroundColor: "#000000" }}>
         <tbody>
           <tr>
             <td width="450" style={{ backgroundColor: "#ffffff" }}>
@@ -96,17 +95,11 @@ export const Page2 = () => {
             </td>
           </tr>
         </tbody>
-      </table>
+      </StyledTable>
 
       <br />
 
-      <table
-        border="0"
-        width="650"
-        style={{ backgroundColor: "#ffffff" }}
-        cellPadding="0"
-        cellSpacing="0"
-      >
+      <StyledTable width="650">
         <tbody>
           <tr>
             <td>
@@ -116,13 +109,7 @@ export const Page2 = () => {
           <tr>
             <td>
               <center>
-                <table
-                  cellSpacing="0"
-                  cellPadding="0"
-                  border="0"
-                  style={{ backgroundColor: "#ccc" }}
-                  align="center"
-                >
+                <StyledTable>
                   <tbody>
                     {gridSquares.map((rowSquares, row) => {
                       return (
@@ -138,29 +125,23 @@ export const Page2 = () => {
                       );
                     })}
                   </tbody>
-                </table>
+                </StyledTable>
               </center>
             </td>
           </tr>
         </tbody>
-      </table>
+      </StyledTable>
 
       <br />
 
-      <table
-        border="0"
-        width="650"
-        style={{ backgroundColor: "#ffffff" }}
-        cellPadding="0"
-        cellSpacing="0"
-      >
+      <StyledTable width="650">
         <tbody>
           <tr valign="top">
             <td width="20">&nbsp;</td>
             <td width="290">
               <StyledClueType>Across</StyledClueType>
               <br />
-              <table>
+              <StyledTable>
                 <tbody>
                   {(parsedPuzzle?.acrossClues ?? []).map((clue) => (
                     <tr key={`across-${clue.clueNumber}`}>
@@ -173,13 +154,13 @@ export const Page2 = () => {
                     </tr>
                   ))}
                 </tbody>
-              </table>
+              </StyledTable>
             </td>
             <td width="30">&nbsp;</td>
             <td width="290">
               <StyledClueType>Down</StyledClueType>
               <br />
-              <table>
+              <StyledTable>
                 <tbody>
                   {(parsedPuzzle?.downClues ?? []).map((clue) => (
                     <tr key={`across-${clue.clueNumber}`}>
@@ -192,12 +173,12 @@ export const Page2 = () => {
                     </tr>
                   ))}
                 </tbody>
-              </table>
+              </StyledTable>
             </td>
             <td width="20">&nbsp;</td>
           </tr>
         </tbody>
-      </table>
+      </StyledTable>
     </div>
   );
 };
