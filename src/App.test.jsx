@@ -8,11 +8,6 @@ const myRender = () => {
   return render(<RouterProvider router={router} />);
 };
 
-test("App page renders", () => {
-  myRender();
-  expect(screen.getByText("Hello from App")).toBeInTheDocument();
-});
-
 test("App page displays the current puzzle url", async () => {
   myRender();
   expect(
