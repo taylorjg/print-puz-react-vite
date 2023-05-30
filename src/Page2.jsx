@@ -7,6 +7,7 @@ import {
   StyledClueType,
   StyledTable,
 } from "./Page2.styles";
+import { Version } from "./Version";
 import * as U from "./utils";
 
 const findClueNumber = (parsedPuzzle, row, col) => {
@@ -179,6 +180,8 @@ export const Page2 = () => {
           </tr>
         </tbody>
       </StyledTable>
+
+      <Version />
     </div>
   );
 };

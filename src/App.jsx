@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { listPuzzles, scrapePuzzleUrl } from "./serverless";
+import { Version } from "./Version";
 
 export const App = () => {
   const [currentPuzzleUrl, setCurrentPuzzleUrl] = useState("");
@@ -44,6 +45,8 @@ export const App = () => {
       <Link to={"/page2"} state={{ puzzleUrl: currentPuzzleUrl }}>
         Page 2
       </Link>
+
+      <Version />
     </div>
   );
 };
