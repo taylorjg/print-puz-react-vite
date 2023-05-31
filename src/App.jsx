@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { listPuzzles, scrapePuzzleUrl } from "./serverless";
 import { Version } from "./Version";
+import { StyledSection } from "./App.styles";
 
 export const App = () => {
   const [currentPuzzleUrl, setCurrentPuzzleUrl] = useState("");
@@ -21,24 +22,34 @@ export const App = () => {
     listPuzzlesAsync();
   }, []);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const onViewCurrentPuzzleUrl = () => {
+    const state = { puzzleUrl: currentPuzzleUrl };
+    navigate("/page2", { state });
+  };
+
+  const onViewPuzzleListSelection = () => {
+    const state = { puzzleUrl: currentPuzzleUrl };
+    navigate("/page2", { state });
+  };
+
+  const onViewExplicitPuzzleUrl = () => {
     const state = { puzzleUrl: currentPuzzleUrl };
     navigate("/page2", { state });
   };
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "1rem",
-            alignItems: "flex-start",
-          }}
-        >
+      <div data-testid="current-puzzle-url">
+        <StyledSection>
           <input type="text" value={currentPuzzleUrl} readOnly />
+          <button onClick={onViewCurrentPuzzleUrl}>View Puzzle</button>
+        </StyledSection>
+      </div>
+
+      <hr />
+
+      <div data-testid="puzzle-list">
+        <StyledSection>
           <select>
             {puzzles.map((puzzle) => {
               const { filename } = puzzle;
@@ -51,9 +62,18 @@ export const App = () => {
               );
             })}
           </select>
-          <button type="submit">View Puzzle</button>
-        </div>
-      </form>
+          <button onClick={onViewPuzzleListSelection}>View Puzzle</button>
+        </StyledSection>
+      </div>
+
+      <hr />
+
+      <div data-testid="explicit-puzzle-url">
+        <StyledSection>
+          <input type="text" />
+          <button onClick={onViewExplicitPuzzleUrl}>View Puzzle</button>
+        </StyledSection>
+      </div>
 
       <Version />
     </div>
