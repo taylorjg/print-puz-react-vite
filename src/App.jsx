@@ -7,6 +7,8 @@ import { StyledSection } from "./App.styles";
 export const App = () => {
   const [currentPuzzleUrl, setCurrentPuzzleUrl] = useState("");
   const [puzzles, setPuzzles] = useState([]);
+  const [selectedPuzzle, setSelectedPuzzle] = useState("");
+  const [explicitPuzzle, setExplicitPuzzle] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,12 +30,12 @@ export const App = () => {
   };
 
   const onViewPuzzleListSelection = () => {
-    const state = { puzzleUrl: currentPuzzleUrl };
+    const state = { puzzleUrl: selectedPuzzle };
     navigate("/page2", { state });
   };
 
   const onViewExplicitPuzzleUrl = () => {
-    const state = { puzzleUrl: currentPuzzleUrl };
+    const state = { puzzleUrl: explicitPuzzle };
     navigate("/page2", { state });
   };
 
@@ -50,7 +52,11 @@ export const App = () => {
 
       <div data-testid="puzzle-list">
         <StyledSection>
-          <select>
+          <select
+            onChange={(e) => {
+              setSelectedPuzzle(e.target.value);
+            }}
+          >
             {puzzles.map((puzzle) => {
               const { url } = puzzle;
               const pos = url.lastIndexOf("/");
@@ -70,7 +76,13 @@ export const App = () => {
 
       <div data-testid="explicit-puzzle-url">
         <StyledSection>
-          <input type="text" />
+          <input
+            type="text"
+            value={explicitPuzzle}
+            onChange={(e) => {
+              setExplicitPuzzle(e.target.value);
+            }}
+          />
           <button onClick={onViewExplicitPuzzleUrl}>View Puzzle</button>
         </StyledSection>
       </div>
