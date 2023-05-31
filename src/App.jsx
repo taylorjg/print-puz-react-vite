@@ -52,11 +52,11 @@ export const App = () => {
         <StyledSection>
           <select>
             {puzzles.map((puzzle) => {
-              const { filename } = puzzle;
-              const pos = filename.lastIndexOf("/");
-              const name = filename.substring(pos + 1);
+              const { url } = puzzle;
+              const pos = url.lastIndexOf("/");
+              const name = url.substring(pos + 1);
               return (
-                <option key={filename} value={filename}>
+                <option key={url} value={url}>
                   {name}
                 </option>
               );

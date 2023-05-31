@@ -13,8 +13,8 @@ const mockListPuzzlesHandler = (_req, res, ctx) => {
     ctx.status(200),
     ctx.json({
       puzzles: [
-        { filename: "mock-puzzle-url-1", timestamp: "2023-01-01" },
-        { filename: "mock-puzzle-url-2", timestamp: "2023-02-02" },
+        { url: "mock-puzzle-url-1", timestamp: "2023-01-01" },
+        { url: "mock-puzzle-url-2", timestamp: "2023-02-02" },
       ],
     })
   );
