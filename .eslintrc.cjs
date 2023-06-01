@@ -11,6 +11,7 @@ module.exports = {
     "plugin:prettier/recommended",
     "plugin:vitest/recommended",
     "plugin:vitest-globals/recommended",
+    "plugin:cypress/recommended",
   ],
   parserOptions: { ecmaVersion: "latest", sourceType: "module" },
   settings: { react: { version: "18.2" } },
