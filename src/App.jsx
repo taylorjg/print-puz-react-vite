@@ -19,6 +19,9 @@ export const App = () => {
     const listPuzzlesAsync = async () => {
       const puzzles = await listPuzzles();
       setPuzzles(puzzles);
+      if (puzzles.length > 0) {
+        setSelectedPuzzle(puzzles[0].url);
+      }
     };
     scrapePuzzleUrlAsync();
     listPuzzlesAsync();
@@ -76,7 +79,9 @@ export const App = () => {
 
       <div data-testid="explicit-puzzle-url">
         <StyledSection>
+          <label id="explicit-puzzle-url-textfield-label">Puzzle Url:</label>
           <input
+            aria-labelledby="explicit-puzzle-url-textfield-label"
             type="text"
             value={explicitPuzzle}
             onChange={(e) => {
