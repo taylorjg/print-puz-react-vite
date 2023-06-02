@@ -22,7 +22,11 @@ jobs:
       - uses: cypress-io/github-action@v5
         with:
           build: npm run build
+          # We need to create a symbolic link in the dist folder because
+          # of the "base" setting in vite.config.js:
+          #   base: "/print-puz-react-vite"
           start: ln -s . dist/print-puz-react-vite, npx serve dist -p 5173
+          # The "wait-on" value needs to match "baseUrl" in cypress.config.js.
           wait-on: "http://localhost:5173/print-puz-react-vite"
           browser: chrome
 
@@ -40,14 +44,11 @@ jobs:
         run: npm clean-install
       - name: Build
         run: npm run build
-      - run: echo "${{ github.ref }}"
-      - run: echo "${{ github.event.head_commit.message }}"
       - uses: actions-ecosystem/action-regex-match@v2
         id: regex-match
         with:
           text: ${{ github.event.head_commit.message }}
           regex: '^\d+\.\d+\.\d+$'
-      - run: echo "${{ steps.regex-match.outputs.match }}"
       - uses: peaceiris/actions-gh-pages@v3
         if: ${{ (github.ref == 'refs/heads/main') && (steps.regex-match.outputs.match != '') }}
         with:
