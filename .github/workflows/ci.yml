@@ -18,11 +18,15 @@ jobs:
     container: cypress/browsers:node16.17.0-chrome106
     steps:
       - uses: actions/checkout@v3
+      - name: Make the dist folder
+        run: mkdir dist
+      - name: Create a symbolic link - a necessary fudge because of the "base" setting in vite.config.js
+        run: ln -s . dist/print-puz-react-vite
       - name: Run end-to-end Cypress tests
         uses: cypress-io/github-action@v5
         with:
           build: npm run build
-          start: ln -s . dist/print-puz-react-vite && npx serve dist -p 5173
+          start: npx serve dist -p 5173
           wait-on: "http://localhost:5173/print-puz-react-vite"
           browser: chrome
         env:
