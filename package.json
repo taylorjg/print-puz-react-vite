@@ -2,7 +2,7 @@
   "name": "print-puz-react-vite",
   "description": "TODO: add print-puz-react-vite description",
   "private": true,
-  "version": "0.0.5",
+  "version": "0.0.6",
   "type": "module",
   "scripts": {
     "dev": "vite",
