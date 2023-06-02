@@ -19,7 +19,7 @@ jobs:
     container: cypress/browsers:node16.17.0-chrome106
     steps:
       - uses: actions/checkout@v3
-        uses: cypress-io/github-action@v5
+      - uses: cypress-io/github-action@v5
         with:
           build: npm run build
           start: ln -s . dist/print-puz-react-vite, npx serve dist -p 5173
