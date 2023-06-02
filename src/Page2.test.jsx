@@ -15,11 +15,13 @@ const myRender = (initialState) => {
   return render(<RouterProvider router={router} />);
 };
 
-test("Puzzle page displays title and author in header", async () => {
-  myRender({
-    puzzleUrl:
-      "https://www.private-eye.co.uk/pictures/crossword/download/753.puz",
+describe("happy path scenarios", () => {
+  test("Puzzle page displays title and author in header", async () => {
+    myRender({
+      puzzleUrl:
+        "https://www.private-eye.co.uk/pictures/crossword/download/753.puz",
+    });
+    expect(await screen.findByText("Eye 753/1598")).toBeInTheDocument();
+    expect(await screen.findByText("Cyclops")).toBeInTheDocument();
   });
-  expect(await screen.findByText("Eye 753/1598")).toBeInTheDocument();
-  expect(await screen.findByText("Cyclops")).toBeInTheDocument();
 });

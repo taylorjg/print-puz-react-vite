@@ -29,45 +29,47 @@ const checkPageNavigation = async (section, puzzleUrl) => {
   return true;
 };
 
-test("App page: Current Puzzle Url section", async () => {
-  renderPage();
+describe("happy path scenarios", () => {
+  test("App page: Current Puzzle Url section", async () => {
+    renderPage();
 
-  const section = screen.getByTestId("current-puzzle-url");
+    const section = screen.getByTestId("current-puzzle-url");
 
-  expect(
-    await within(section).findByDisplayValue("mock-current-puzzle-url")
-  ).toBeInTheDocument();
+    expect(
+      await within(section).findByDisplayValue("mock-current-puzzle-url")
+    ).toBeInTheDocument();
 
-  await expect(
-    checkPageNavigation(section, "mock-current-puzzle-url")
-  ).resolves.toBeTruthy();
-});
+    await expect(
+      checkPageNavigation(section, "mock-current-puzzle-url")
+    ).resolves.toBeTruthy();
+  });
 
-test("App page: Puzzle List section", async () => {
-  renderPage();
+  test("App page: Puzzle List section", async () => {
+    renderPage();
 
-  const section = screen.getByTestId("puzzle-list");
+    const section = screen.getByTestId("puzzle-list");
 
-  expect(
-    await within(section).findByDisplayValue("mock-puzzle-url-1")
-  ).toBeInTheDocument();
+    expect(
+      await within(section).findByDisplayValue("mock-puzzle-url-1")
+    ).toBeInTheDocument();
 
-  await expect(
-    checkPageNavigation(section, "mock-puzzle-url-1")
-  ).resolves.toBeTruthy();
-});
+    await expect(
+      checkPageNavigation(section, "mock-puzzle-url-1")
+    ).resolves.toBeTruthy();
+  });
 
-test("App page: Explicit Puzzle Url section", async () => {
-  renderPage();
+  test("App page: Explicit Puzzle Url section", async () => {
+    renderPage();
 
-  const section = screen.getByTestId("explicit-puzzle-url");
+    const section = screen.getByTestId("explicit-puzzle-url");
 
-  await userEvent.type(
-    within(section).getByLabelText("Puzzle Url:"),
-    "my-explicit-puzzle-url"
-  );
+    await userEvent.type(
+      within(section).getByLabelText("Puzzle Url:"),
+      "my-explicit-puzzle-url"
+    );
 
-  await expect(
-    checkPageNavigation(section, "my-explicit-puzzle-url")
-  ).resolves.toBeTruthy();
+    await expect(
+      checkPageNavigation(section, "my-explicit-puzzle-url")
+    ).resolves.toBeTruthy();
+  });
 });

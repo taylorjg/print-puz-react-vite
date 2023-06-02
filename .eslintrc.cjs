@@ -19,4 +19,12 @@ module.exports = {
   rules: {
     "react-refresh/only-export-components": "warn",
   },
+  overrides: [
+    {
+      files: ["*.cy.js"],
+      rules: {
+        "vitest/expect-expect": "off",
+      },
+    },
+  ],
 };

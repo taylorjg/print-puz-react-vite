@@ -1,7 +1,5 @@
-/* eslint-disable vitest/expect-expect */
-
-describe("e2e tests", () => {
-  it("Current puzzle", () => {
+describe("happy path scenarios", () => {
+  it("scrape current puzzle", () => {
     cy.visit("/");
     cy.findByTestId("current-puzzle-url").within(() => {
       cy.findByDisplayValue(/.puz$/);
