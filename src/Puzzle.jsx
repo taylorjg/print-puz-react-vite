@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Alert, Button } from "@mui/material";
 import { parsePuzzle, extractErrorMessage } from "./serverless";
 import {
   StyledClue,
   StyledClueNumber,
   StyledClueType,
+  StyledMessageWrapper,
   StyledTable,
 } from "./Puzzle.styles";
 import { Version } from "./Version";
@@ -58,34 +60,38 @@ const makeGridSquares = (parsedPuzzle) => {
   return gridSquares;
 };
 
-const NoPuzzleUrl = () => {
-  return (
-    <div>
-      <div>
-        No <code>puzzleUrl</code> specified.
-      </div>
-      <Link to="/">Return Home</Link>
-    </div>
-  );
-};
-
 const Loading = () => {
-  return <div>Loading...</div>;
-};
-
-const FailedToLoadPuzzle = ({ puzzleUrl, errorMessage }) => {
   return (
-    <div>
-      <div>Something went wrong trying to parse &quot;{puzzleUrl}&quot;.</div>
-      {errorMessage && <div>{errorMessage}</div>}
-      <Link to="/">Return Home</Link>
-    </div>
+    <StyledMessageWrapper>
+      <Alert severity="info" variant="filled">
+        Loading puzzle...
+      </Alert>
+    </StyledMessageWrapper>
   );
 };
 
-FailedToLoadPuzzle.propTypes = {
-  puzzleUrl: PropTypes.string.isRequired,
-  errorMessage: PropTypes.string,
+const OnError = ({ message, onReturnHome }) => {
+  return (
+    <StyledMessageWrapper>
+      <Alert
+        sx={{ width: "33%" }}
+        severity="error"
+        variant="filled"
+        action={
+          <Button color="inherit" onClick={onReturnHome}>
+            Return Home
+          </Button>
+        }
+      >
+        {message}
+      </Alert>
+    </StyledMessageWrapper>
+  );
+};
+
+OnError.propTypes = {
+  message: PropTypes.string.isRequired,
+  onReturnHome: PropTypes.func.isRequired,
 };
 
 export const Puzzle = () => {
@@ -95,6 +101,7 @@ export const Puzzle = () => {
   const [parsedPuzzle, setParsedPuzzle] = useState();
   const [loading, setLoading] = useState(true);
   const startedRef = useRef(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const parsePuzzleAsync = async () => {
@@ -113,8 +120,14 @@ export const Puzzle = () => {
     parsePuzzleAsync();
   }, [state]);
 
+  const onReturnHome = () => {
+    navigate("/");
+  };
+
   if (!state?.puzzleUrl) {
-    return <NoPuzzleUrl />;
+    return (
+      <OnError message="No puzzle specified." onReturnHome={onReturnHome} />
+    );
   }
 
   if (loading) {
@@ -123,9 +136,9 @@ export const Puzzle = () => {
 
   if (errorMessage || !parsedPuzzle) {
     return (
-      <FailedToLoadPuzzle
-        puzzleUrl={state.puzzleUrl}
-        errorMessage={errorMessage}
+      <OnError
+        message="Failed to read or parse puzzle."
+        onReturnHome={onReturnHome}
       />
     );
   }
