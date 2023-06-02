@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { listPuzzles, scrapePuzzleUrl } from "./serverless";
 import { Version } from "./Version";
-import { StyledSection } from "./App.styles";
+import { StyledSection } from "./Home.styles";
 
-export const App = () => {
+export const Home = () => {
   const [currentPuzzleUrl, setCurrentPuzzleUrl] = useState("");
   const [puzzles, setPuzzles] = useState([]);
   const [selectedPuzzle, setSelectedPuzzle] = useState("");

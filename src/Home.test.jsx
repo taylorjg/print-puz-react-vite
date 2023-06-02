@@ -1,12 +1,12 @@
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
-import { App } from "./App";
+import { Home } from "./Home";
 import { RouterTestComponent } from "./mocks/RouterTestComponent";
 
 const renderPage = () => {
   const routes = [
-    { path: "/", element: <App /> },
+    { path: "/", element: <Home /> },
     { path: "/page2", element: <RouterTestComponent /> },
   ];
   const router = createMemoryRouter(routes);
@@ -30,7 +30,7 @@ const checkPageNavigation = async (section, puzzleUrl) => {
 };
 
 describe("happy path scenarios", () => {
-  test("App page: Current Puzzle Url section", async () => {
+  test("Home page: Current Puzzle Url section", async () => {
     renderPage();
 
     const section = screen.getByTestId("current-puzzle-url");
@@ -44,7 +44,7 @@ describe("happy path scenarios", () => {
     ).resolves.toBeTruthy();
   });
 
-  test("App page: Puzzle List section", async () => {
+  test("Home page: Puzzle List section", async () => {
     renderPage();
 
     const section = screen.getByTestId("puzzle-list");
@@ -58,7 +58,7 @@ describe("happy path scenarios", () => {
     ).resolves.toBeTruthy();
   });
 
-  test("App page: Explicit Puzzle Url section", async () => {
+  test("Home page: Explicit Puzzle Url section", async () => {
     renderPage();
 
     const section = screen.getByTestId("explicit-puzzle-url");
