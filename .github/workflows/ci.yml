@@ -49,7 +49,7 @@ jobs:
           regex: '^\d+\.\d+\.\d+$'
       - run: echo "${{ steps.regex-match.outputs.match }}"
       - uses: peaceiris/actions-gh-pages@v3
-        if: ${{ (github.ref == "refs/heads/main") && (steps.regex-match.outputs.match != "") }}
+        if: ${{ (github.ref == 'refs/heads/main') && (steps.regex-match.outputs.match != '') }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
