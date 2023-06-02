@@ -46,8 +46,7 @@ jobs:
           text: ${{ github.event.ref }}
           regex: '^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$'
       - uses: peaceiris/actions-gh-pages@v3
-        if: ${{ github.ref == 'refs/heads/main' }}
-        if: ${{ steps.regex-match.outputs.match != '' }}
+        if: ${{ (github.ref == 'refs/heads/main') && (steps.regex-match.outputs.match != '') }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
