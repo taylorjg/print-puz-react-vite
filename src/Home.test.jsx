@@ -7,7 +7,7 @@ import { RouterTestComponent } from "./mocks/RouterTestComponent";
 const renderPage = () => {
   const routes = [
     { path: "/", element: <Home /> },
-    { path: "/page2", element: <RouterTestComponent /> },
+    { path: "/puzzle", element: <RouterTestComponent /> },
   ];
   const router = createMemoryRouter(routes);
   return render(<RouterProvider router={router} />);
@@ -19,7 +19,7 @@ const checkPageNavigation = async (section, puzzleUrl) => {
   });
   userEvent.click(viewPuzzleButton);
 
-  const expectedPathname = "/page2";
+  const expectedPathname = "/puzzle";
   const expectedState = JSON.stringify({ puzzleUrl });
 
   expect(await screen.findByText("RouterTestComponent")).toBeInTheDocument();

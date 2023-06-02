@@ -29,17 +29,17 @@ export const Home = () => {
 
   const onViewCurrentPuzzleUrl = () => {
     const state = { puzzleUrl: currentPuzzleUrl };
-    navigate("/page2", { state });
+    navigate("/puzzle", { state });
   };
 
   const onViewPuzzleListSelection = () => {
     const state = { puzzleUrl: selectedPuzzle };
-    navigate("/page2", { state });
+    navigate("/puzzle", { state });
   };
 
   const onViewExplicitPuzzleUrl = () => {
     const state = { puzzleUrl: explicitPuzzle };
-    navigate("/page2", { state });
+    navigate("/puzzle", { state });
   };
 
   return (

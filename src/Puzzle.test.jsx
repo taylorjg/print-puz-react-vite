@@ -1,12 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
-import { Page2 } from "./Page2";
+import { Puzzle } from "./Puzzle";
 
 const myRender = (initialState) => {
-  const routes = [{ path: "/page2", element: <Page2 /> }];
+  const routes = [{ path: "/puzzle", element: <Puzzle /> }];
   const initialEntries = [
     {
-      pathname: "/page2",
+      pathname: "/puzzle",
       state: initialState,
     },
   ];

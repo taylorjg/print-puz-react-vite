@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createHashRouter, RouterProvider } from "react-router-dom";
 import { Home } from "./Home.jsx";
-import { Page2 } from "./Page2";
+import { Puzzle } from "./Puzzle";
 
 const router = createHashRouter([
   {
@@ -10,8 +10,8 @@ const router = createHashRouter([
     element: <Home />,
   },
   {
-    path: "/page2",
-    element: <Page2 />,
+    path: "/puzzle",
+    element: <Puzzle />,
   },
 ]);
 
