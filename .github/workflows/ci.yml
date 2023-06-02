@@ -40,16 +40,16 @@ jobs:
         run: npm clean-install
       - name: Build
         run: npm run build
-      - run: echo ${{ github.ref }}
-      - run: echo ${{ github.event.head_commit.message }}
+      - run: echo "${{ github.ref }}"
+      - run: echo "${{ github.event.head_commit.message }}"
       - uses: actions-ecosystem/action-regex-match@v2
         id: regex-match
         with:
           text: ${{ github.event.head_commit.message }}
-          regex: '^\d+\.\d+\.\d+$'
-      - run: echo ${{ steps.regex-match.outputs.match }}
+          regex: "^\d+\.\d+\.\d+$"
+      - run: echo "${{ steps.regex-match.outputs.match }}"
       - uses: peaceiris/actions-gh-pages@v3
-        if: ${{ (github.ref == 'refs/heads/main') && (steps.regex-match.outputs.match != '') }}
+        if: ${{ (github.ref == "refs/heads/main") && (steps.regex-match.outputs.match != "") }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
