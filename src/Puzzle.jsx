@@ -9,7 +9,6 @@ import {
 } from "./Puzzle.styles";
 import { Version } from "./Version";
 import * as U from "./utils";
-import { setupWorker } from "msw";
 
 const findClueNumber = (parsedPuzzle, row, col) => {
   const matchingAcrossClue = parsedPuzzle.acrossClues.find(
