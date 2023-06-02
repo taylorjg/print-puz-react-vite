@@ -2,6 +2,13 @@ import axios from "axios";
 
 const SERVERLESS_URL = "https://fr0r2wv048.execute-api.us-east-1.amazonaws.com";
 
+export const extractErrorMessage = (e) => {
+  if (axios.isAxiosError(e) && e.response) {
+    return e.response.data?.error ?? e.message;
+  }
+  return e.message;
+};
+
 export const scrapePuzzleUrl = async () => {
   const response = await axios.get(`${SERVERLESS_URL}/scrape-puzzle-url`);
   return response.data.puzzleUrl;

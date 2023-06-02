@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { parsePuzzle } from "./serverless";
+import { useEffect, useRef, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { parsePuzzle, extractErrorMessage } from "./serverless";
 import {
   StyledClue,
   StyledClueNumber,
@@ -9,6 +9,7 @@ import {
 } from "./Puzzle.styles";
 import { Version } from "./Version";
 import * as U from "./utils";
+import { setupWorker } from "msw";
 
 const findClueNumber = (parsedPuzzle, row, col) => {
   const matchingAcrossClue = parsedPuzzle.acrossClues.find(
@@ -60,17 +61,56 @@ const makeGridSquares = (parsedPuzzle) => {
 export const Puzzle = () => {
   const { state } = useLocation();
 
+  const [errorMessage, setErrorMessage] = useState();
   const [parsedPuzzle, setParsedPuzzle] = useState();
+  const [loading, setLoading] = useState(true);
+  const startedRef = useRef(false);
 
   useEffect(() => {
     const parsePuzzleAsync = async () => {
-      const result = await parsePuzzle(state?.puzzleUrl);
-      setParsedPuzzle(result);
+      if (state?.puzzleUrl && !startedRef.current) {
+        try {
+          startedRef.current = true;
+          const result = await parsePuzzle(state.puzzleUrl);
+          setParsedPuzzle(result);
+        } catch (error) {
+          setErrorMessage(extractErrorMessage(error));
+        } finally {
+          setLoading(false);
+        }
+      }
     };
     parsePuzzleAsync();
-  }, [state?.puzzleUrl]);
+  }, [state]);
 
-  const gridSquares = parsedPuzzle ? makeGridSquares(parsedPuzzle) : [];
+  if (!state?.puzzleUrl) {
+    return (
+      <div>
+        <div>
+          No <code>puzzleUrl</code> specified.
+        </div>
+        <Link to="/">Return Home</Link>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (errorMessage || !parsedPuzzle) {
+    return (
+      <div>
+        <div>
+          Something went wrong trying to parse &quot;{state.puzzleUrl}&quot;.
+        </div>
+        {errorMessage && <div>{errorMessage}</div>}
+        <Link to="/">Return Home</Link>
+      </div>
+    );
+  }
+
+  const gridSquares = makeGridSquares(parsedPuzzle);
 
   return (
     <div>
