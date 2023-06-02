@@ -41,12 +41,12 @@ jobs:
       - name: Build
         run: npm run build
       - run: echo ${{ github.ref }}
-      - run: echo ${{ github.event.ref }}
+      - run: echo ${{ github.event.head_commit.message }}
       - uses: actions-ecosystem/action-regex-match@v2
         id: regex-match
         with:
-          text: ${{ github.event.ref }}
-          regex: '^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$'
+          text: ${{ github.event.head_commit.message }}
+          regex: '^\d+\.\d+\.\d+$'
       - run: echo ${{ steps.regex-match.outputs.match }}
       - uses: peaceiris/actions-gh-pages@v3
         if: ${{ (github.ref == 'refs/heads/main') && (steps.regex-match.outputs.match != '') }}
