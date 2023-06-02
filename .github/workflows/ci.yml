@@ -46,7 +46,7 @@ jobs:
         id: regex-match
         with:
           text: ${{ github.event.head_commit.message }}
-          regex: "^\d+\.\d+\.\d+$"
+          regex: "^[0-9]+\.[0-9]+\.[0-9]+$"
       - run: echo "${{ steps.regex-match.outputs.match }}"
       - uses: peaceiris/actions-gh-pages@v3
         if: ${{ (github.ref == "refs/heads/main") && (steps.regex-match.outputs.match != "") }}
