@@ -47,7 +47,9 @@ export const Home = () => {
       <div data-testid="current-puzzle-url">
         <StyledSection>
           <input type="text" value={currentPuzzleUrl} readOnly />
-          <button onClick={onViewCurrentPuzzleUrl}>View Puzzle</button>
+          <button onClick={onViewCurrentPuzzleUrl} disabled={!currentPuzzleUrl}>
+            View Puzzle
+          </button>
         </StyledSection>
       </div>
 
@@ -71,7 +73,12 @@ export const Home = () => {
               );
             })}
           </select>
-          <button onClick={onViewPuzzleListSelection}>View Puzzle</button>
+          <button
+            onClick={onViewPuzzleListSelection}
+            disabled={!selectedPuzzle}
+          >
+            View Puzzle
+          </button>
         </StyledSection>
       </div>
 
@@ -88,7 +95,9 @@ export const Home = () => {
               setExplicitPuzzle(e.target.value);
             }}
           />
-          <button onClick={onViewExplicitPuzzleUrl}>View Puzzle</button>
+          <button onClick={onViewExplicitPuzzleUrl} disabled={!explicitPuzzle}>
+            View Puzzle
+          </button>
         </StyledSection>
       </div>
 
