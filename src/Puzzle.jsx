@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
 import { parsePuzzle, extractErrorMessage } from "./serverless";
 import {
@@ -57,6 +58,36 @@ const makeGridSquares = (parsedPuzzle) => {
   return gridSquares;
 };
 
+const NoPuzzleUrl = () => {
+  return (
+    <div>
+      <div>
+        No <code>puzzleUrl</code> specified.
+      </div>
+      <Link to="/">Return Home</Link>
+    </div>
+  );
+};
+
+const Loading = () => {
+  return <div>Loading...</div>;
+};
+
+const FailedToLoadPuzzle = ({ puzzleUrl, errorMessage }) => {
+  return (
+    <div>
+      <div>Something went wrong trying to parse &quot;{puzzleUrl}&quot;.</div>
+      {errorMessage && <div>{errorMessage}</div>}
+      <Link to="/">Return Home</Link>
+    </div>
+  );
+};
+
+FailedToLoadPuzzle.propTypes = {
+  puzzleUrl: PropTypes.string.isRequired,
+  errorMessage: PropTypes.string,
+};
+
 export const Puzzle = () => {
   const { state } = useLocation();
 
@@ -83,29 +114,19 @@ export const Puzzle = () => {
   }, [state]);
 
   if (!state?.puzzleUrl) {
-    return (
-      <div>
-        <div>
-          No <code>puzzleUrl</code> specified.
-        </div>
-        <Link to="/">Return Home</Link>
-      </div>
-    );
+    return <NoPuzzleUrl />;
   }
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (errorMessage || !parsedPuzzle) {
     return (
-      <div>
-        <div>
-          Something went wrong trying to parse &quot;{state.puzzleUrl}&quot;.
-        </div>
-        {errorMessage && <div>{errorMessage}</div>}
-        <Link to="/">Return Home</Link>
-      </div>
+      <FailedToLoadPuzzle
+        puzzleUrl={state.puzzleUrl}
+        errorMessage={errorMessage}
+      />
     );
   }
 
@@ -117,14 +138,14 @@ export const Puzzle = () => {
         <tbody>
           <tr>
             <td width="450" style={{ backgroundColor: "#ffffff" }}>
-              {parsedPuzzle?.puzzle.title}
+              {parsedPuzzle.puzzle.title}
               <br />
               <div style={{ width: "250px", height: "1px" }}>
                 <img src="clear.gif" />
               </div>
             </td>
             <td align="right" style={{ backgroundColor: "#ffffff" }}>
-              {parsedPuzzle?.puzzle.author}
+              {parsedPuzzle.puzzle.author}
             </td>
           </tr>
           <tr>
@@ -183,7 +204,7 @@ export const Puzzle = () => {
               <br />
               <StyledTable>
                 <tbody>
-                  {(parsedPuzzle?.acrossClues ?? []).map((clue) => (
+                  {(parsedPuzzle.acrossClues ?? []).map((clue) => (
                     <tr key={`across-${clue.clueNumber}`}>
                       <td valign="top">
                         <StyledClueNumber>{clue.clueNumber}</StyledClueNumber>
@@ -202,7 +223,7 @@ export const Puzzle = () => {
               <br />
               <StyledTable>
                 <tbody>
-                  {(parsedPuzzle?.downClues ?? []).map((clue) => (
+                  {(parsedPuzzle.downClues ?? []).map((clue) => (
                     <tr key={`across-${clue.clueNumber}`}>
                       <td valign="top">
                         <StyledClueNumber>{clue.clueNumber}</StyledClueNumber>
