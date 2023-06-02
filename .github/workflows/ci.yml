@@ -10,7 +10,7 @@ jobs:
         with:
           node-version: "18.16"
       - name: Clean install
-      - run: npm clean-install
+        run: npm clean-install
       - name: Run unit tests
         run: npm test
 
@@ -39,9 +39,9 @@ jobs:
         with:
           node-version: "18.16"
       - name: Clean install
-      - run: npm clean-install
+        run: npm clean-install
       - name: Build
-      - run: npm run build
+        run: npm run build
       - uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
