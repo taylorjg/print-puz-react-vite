@@ -1,17 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Button, MenuItem, Select, TextField } from "@mui/material";
 import { listPuzzles, scrapePuzzleUrl } from "../../serverless";
 import { Version } from "../../Version";
-import { StyledSection } from "./Home.styles";
+import { StyledSection, StyledSections } from "./Home.styles";
 
 export const Home = () => {
-  const [currentPuzzleUrl, setCurrentPuzzleUrl] = useState("");
+  const mountedRef = useRef(false);
+  const [currentPuzzle, setCurrentPuzzleUrl] = useState("");
   const [puzzles, setPuzzles] = useState([]);
   const [selectedPuzzle, setSelectedPuzzle] = useState("");
   const [explicitPuzzle, setExplicitPuzzle] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (mountedRef.current) return;
+    mountedRef.current = true;
     const scrapePuzzleUrlAsync = async () => {
       const puzzleUrl = await scrapePuzzleUrl();
       setCurrentPuzzleUrl(puzzleUrl);
@@ -28,7 +32,7 @@ export const Home = () => {
   }, []);
 
   const onViewCurrentPuzzleUrl = () => {
-    const state = { puzzleUrl: currentPuzzleUrl };
+    const state = { puzzleUrl: currentPuzzle };
     navigate("/puzzle", { state });
   };
 
@@ -43,65 +47,56 @@ export const Home = () => {
   };
 
   return (
-    <div>
-      <div data-testid="current-puzzle-url">
-        <StyledSection>
-          <input type="text" value={currentPuzzleUrl} readOnly />
-          <button onClick={onViewCurrentPuzzleUrl} disabled={!currentPuzzleUrl}>
-            View Puzzle
-          </button>
-        </StyledSection>
-      </div>
+    <StyledSections>
+      <StyledSection data-testid="current-puzzle">
+        <TextField size="small" type="text" value={currentPuzzle} readOnly />
+        <Button onClick={onViewCurrentPuzzleUrl} disabled={!currentPuzzle}>
+          View Puzzle
+        </Button>
+      </StyledSection>
 
-      <hr />
+      <StyledSection data-testid="puzzle-list">
+        <Select
+          sx={{ width: "100%" }}
+          size="small"
+          aria-label="Puzzles"
+          value={selectedPuzzle}
+          onChange={(e) => {
+            setSelectedPuzzle(e.target.value);
+          }}
+        >
+          {puzzles.map((puzzle) => {
+            const { url } = puzzle;
+            const pos = url.lastIndexOf("/");
+            const name = url.substring(pos + 1);
+            return (
+              <MenuItem key={url} value={url}>
+                {name}
+              </MenuItem>
+            );
+          })}
+        </Select>
+        <Button onClick={onViewPuzzleListSelection} disabled={!selectedPuzzle}>
+          View Puzzle
+        </Button>
+      </StyledSection>
 
-      <div data-testid="puzzle-list">
-        <StyledSection>
-          <select
-            aria-label="Puzzles"
-            onChange={(e) => {
-              setSelectedPuzzle(e.target.value);
-            }}
-          >
-            {puzzles.map((puzzle) => {
-              const { url } = puzzle;
-              const pos = url.lastIndexOf("/");
-              const name = url.substring(pos + 1);
-              return (
-                <option key={url} value={url}>
-                  {name}
-                </option>
-              );
-            })}
-          </select>
-          <button
-            onClick={onViewPuzzleListSelection}
-            disabled={!selectedPuzzle}
-          >
-            View Puzzle
-          </button>
-        </StyledSection>
-      </div>
-
-      <hr />
-
-      <div data-testid="explicit-puzzle-url">
-        <StyledSection>
-          <input
-            aria-label="Puzzle Url"
-            type="text"
-            value={explicitPuzzle}
-            onChange={(e) => {
-              setExplicitPuzzle(e.target.value);
-            }}
-          />
-          <button onClick={onViewExplicitPuzzleUrl} disabled={!explicitPuzzle}>
-            View Puzzle
-          </button>
-        </StyledSection>
-      </div>
+      <StyledSection data-testid="explicit-puzzle-url">
+        <TextField
+          size="small"
+          label="Puzzle Url"
+          type="text"
+          value={explicitPuzzle}
+          onChange={(e) => {
+            setExplicitPuzzle(e.target.value);
+          }}
+        />
+        <Button onClick={onViewExplicitPuzzleUrl} disabled={!explicitPuzzle}>
+          View Puzzle
+        </Button>
+      </StyledSection>
 
       <Version />
-    </div>
+    </StyledSections>
   );
 };

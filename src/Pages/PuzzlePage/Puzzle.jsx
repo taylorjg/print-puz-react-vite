@@ -97,17 +97,18 @@ OnError.propTypes = {
 export const Puzzle = () => {
   const { state } = useLocation();
 
+  const mountedRef = useRef(false);
   const [errorMessage, setErrorMessage] = useState();
   const [parsedPuzzle, setParsedPuzzle] = useState();
   const [loading, setLoading] = useState(true);
-  const startedRef = useRef(false);
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (mountedRef.current) return;
+    mountedRef.current = true;
     const parsePuzzleAsync = async () => {
-      if (state?.puzzleUrl && !startedRef.current) {
+      if (state?.puzzleUrl) {
         try {
-          startedRef.current = true;
           const result = await parsePuzzle(state.puzzleUrl);
           setParsedPuzzle(result);
         } catch (error) {
