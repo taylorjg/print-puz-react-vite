@@ -7,9 +7,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint src cypress --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "vitest run",
+    "test:cypress": "cypress run",
     "deploy": "gh-pages -d dist",
     "predeploy": "npm run build",
     "open": "open https://taylorjg.github.io/print-puz-react-vite"

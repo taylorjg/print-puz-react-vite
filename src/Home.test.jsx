@@ -56,7 +56,7 @@ describe("happy path scenarios", () => {
     ).toBeInTheDocument();
 
     userEvent.selectOptions(
-      within(section).getByDisplayValue("mock-puzzle-1.puz"),
+      within(section).getByLabelText("Puzzles"),
       "mock-puzzle-2.puz"
     );
 
@@ -71,7 +71,7 @@ describe("happy path scenarios", () => {
     const section = screen.getByTestId("explicit-puzzle-url");
 
     await userEvent.type(
-      within(section).getByLabelText("Puzzle Url:"),
+      within(section).getByLabelText("Puzzle Url"),
       "http://website.com/mock-explicit-puzzle.puz"
     );
 

@@ -58,6 +58,7 @@ export const Home = () => {
       <div data-testid="puzzle-list">
         <StyledSection>
           <select
+            aria-label="Puzzles"
             onChange={(e) => {
               setSelectedPuzzle(e.target.value);
             }}
@@ -86,9 +87,8 @@ export const Home = () => {
 
       <div data-testid="explicit-puzzle-url">
         <StyledSection>
-          <label id="explicit-puzzle-url-textfield-label">Puzzle Url:</label>
           <input
-            aria-labelledby="explicit-puzzle-url-textfield-label"
+            aria-label="Puzzle Url"
             type="text"
             value={explicitPuzzle}
             onChange={(e) => {
