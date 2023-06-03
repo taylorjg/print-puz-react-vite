@@ -36,11 +36,13 @@ describe("happy path scenarios", () => {
     const section = screen.getByTestId("current-puzzle-url");
 
     expect(
-      await within(section).findByDisplayValue("mock-current-puzzle-url")
+      await within(section).findByDisplayValue(
+        "http://website.com/mock-current-puzzle.puz"
+      )
     ).toBeInTheDocument();
 
     await expect(
-      checkPageNavigation(section, "mock-current-puzzle-url")
+      checkPageNavigation(section, "http://website.com/mock-current-puzzle.puz")
     ).resolves.toBeTruthy();
   });
 
@@ -50,16 +52,16 @@ describe("happy path scenarios", () => {
     const section = screen.getByTestId("puzzle-list");
 
     expect(
-      await within(section).findByDisplayValue("mock-puzzle-url-1")
+      await within(section).findByDisplayValue("mock-puzzle-1.puz")
     ).toBeInTheDocument();
 
     userEvent.selectOptions(
-      within(section).getByDisplayValue("mock-puzzle-url-1"),
-      "mock-puzzle-url-2"
+      within(section).getByDisplayValue("mock-puzzle-1.puz"),
+      "mock-puzzle-2.puz"
     );
 
     await expect(
-      checkPageNavigation(section, "mock-puzzle-url-2")
+      checkPageNavigation(section, "http://website.com/mock-puzzle-2.puz")
     ).resolves.toBeTruthy();
   });
 
@@ -70,11 +72,14 @@ describe("happy path scenarios", () => {
 
     await userEvent.type(
       within(section).getByLabelText("Puzzle Url:"),
-      "my-explicit-puzzle-url"
+      "http://website.com/mock-explicit-puzzle.puz"
     );
 
     await expect(
-      checkPageNavigation(section, "my-explicit-puzzle-url")
+      checkPageNavigation(
+        section,
+        "http://website.com/mock-explicit-puzzle.puz"
+      )
     ).resolves.toBeTruthy();
   });
 });
