@@ -1,9 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, MenuItem, Select, TextField } from "@mui/material";
+import { Button, Container, MenuItem, Select, TextField } from "@mui/material";
 import { listPuzzles, scrapePuzzleUrl } from "../../serverless";
 import { Version } from "../../Version";
-import { StyledSection, StyledSections } from "./Home.styles";
+import {
+  StyledPageWrapper,
+  StyledSection,
+  StyledSections,
+} from "./Home.styles";
 
 export const Home = () => {
   const mountedRef = useRef(false);
@@ -47,56 +51,73 @@ export const Home = () => {
   };
 
   return (
-    <StyledSections>
-      <StyledSection data-testid="current-puzzle">
-        <TextField size="small" type="text" value={currentPuzzle} readOnly />
-        <Button onClick={onViewCurrentPuzzleUrl} disabled={!currentPuzzle}>
-          View Puzzle
-        </Button>
-      </StyledSection>
+    <StyledPageWrapper>
+      <Container maxWidth="sm">
+        <StyledSections>
+          <StyledSection data-testid="current-puzzle">
+            <TextField
+              fullWidth
+              size="small"
+              type="text"
+              value={currentPuzzle}
+              readOnly
+            />
+            <Button onClick={onViewCurrentPuzzleUrl} disabled={!currentPuzzle}>
+              View Puzzle
+            </Button>
+          </StyledSection>
 
-      <StyledSection data-testid="puzzle-list">
-        <Select
-          sx={{ width: "100%" }}
-          size="small"
-          aria-label="Puzzles"
-          value={selectedPuzzle}
-          onChange={(e) => {
-            setSelectedPuzzle(e.target.value);
-          }}
-        >
-          {puzzles.map((puzzle) => {
-            const { url } = puzzle;
-            const pos = url.lastIndexOf("/");
-            const name = url.substring(pos + 1);
-            return (
-              <MenuItem key={url} value={url}>
-                {name}
-              </MenuItem>
-            );
-          })}
-        </Select>
-        <Button onClick={onViewPuzzleListSelection} disabled={!selectedPuzzle}>
-          View Puzzle
-        </Button>
-      </StyledSection>
+          <StyledSection data-testid="puzzle-list">
+            <Select
+              fullWidth
+              size="small"
+              aria-label="Puzzles"
+              value={selectedPuzzle}
+              onChange={(e) => {
+                setSelectedPuzzle(e.target.value);
+              }}
+            >
+              {puzzles.map((puzzle) => {
+                const { url } = puzzle;
+                const pos = url.lastIndexOf("/");
+                const name = url.substring(pos + 1);
+                return (
+                  <MenuItem key={url} value={url}>
+                    {name}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+            <Button
+              onClick={onViewPuzzleListSelection}
+              disabled={!selectedPuzzle}
+            >
+              View Puzzle
+            </Button>
+          </StyledSection>
 
-      <StyledSection data-testid="explicit-puzzle-url">
-        <TextField
-          size="small"
-          label="Puzzle Url"
-          type="text"
-          value={explicitPuzzle}
-          onChange={(e) => {
-            setExplicitPuzzle(e.target.value);
-          }}
-        />
-        <Button onClick={onViewExplicitPuzzleUrl} disabled={!explicitPuzzle}>
-          View Puzzle
-        </Button>
-      </StyledSection>
+          <StyledSection data-testid="explicit-puzzle-url">
+            <TextField
+              fullWidth
+              size="small"
+              label="Puzzle Url"
+              type="text"
+              value={explicitPuzzle}
+              onChange={(e) => {
+                setExplicitPuzzle(e.target.value);
+              }}
+            />
+            <Button
+              onClick={onViewExplicitPuzzleUrl}
+              disabled={!explicitPuzzle}
+            >
+              View Puzzle
+            </Button>
+          </StyledSection>
 
-      <Version />
-    </StyledSections>
+          <Version />
+        </StyledSections>
+      </Container>
+    </StyledPageWrapper>
   );
 };
