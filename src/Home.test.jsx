@@ -53,8 +53,13 @@ describe("happy path scenarios", () => {
       await within(section).findByDisplayValue("mock-puzzle-url-1")
     ).toBeInTheDocument();
 
+    userEvent.selectOptions(
+      within(section).getByDisplayValue("mock-puzzle-url-1"),
+      "mock-puzzle-url-2"
+    );
+
     await expect(
-      checkPageNavigation(section, "mock-puzzle-url-1")
+      checkPageNavigation(section, "mock-puzzle-url-2")
     ).resolves.toBeTruthy();
   });
 
