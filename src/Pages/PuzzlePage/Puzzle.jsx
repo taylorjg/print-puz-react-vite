@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Alert, Button } from "@mui/material";
-import { parsePuzzle, extractErrorMessage } from "./serverless";
+import { parsePuzzle, extractErrorMessage } from "../../serverless";
 import {
   StyledClue,
   StyledClueNumber,
@@ -10,8 +10,8 @@ import {
   StyledMessageWrapper,
   StyledTable,
 } from "./Puzzle.styles";
-import { Version } from "./Version";
-import * as U from "./utils";
+import { Version } from "../../Version";
+import * as U from "../../utils";
 
 const findClueNumber = (parsedPuzzle, row, col) => {
   const matchingAcrossClue = parsedPuzzle.acrossClues.find(

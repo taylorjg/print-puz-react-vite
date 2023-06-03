@@ -16,7 +16,7 @@ const myRender = (initialState) => {
 };
 
 describe("happy path scenarios", () => {
-  test("Puzzle page displays title and author in header", async () => {
+  test("PuzzlePage: displays title and author in header", async () => {
     myRender({
       puzzleUrl:
         "https://www.private-eye.co.uk/pictures/crossword/download/753.puz",

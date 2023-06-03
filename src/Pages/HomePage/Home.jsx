@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { listPuzzles, scrapePuzzleUrl } from "./serverless";
-import { Version } from "./Version";
+import { listPuzzles, scrapePuzzleUrl } from "../../serverless";
+import { Version } from "../../Version";
 import { StyledSection } from "./Home.styles";
 
 export const Home = () => {
