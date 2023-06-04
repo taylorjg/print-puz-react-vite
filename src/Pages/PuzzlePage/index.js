@@ -1,1 +1,1 @@
-export * from "./Puzzle";
+export * from "./PuzzlePage";

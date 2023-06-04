@@ -2,12 +2,12 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import { RouterTestComponent } from "../../mocks/RouterTestComponent";
-import { Puzzle } from "./Puzzle";
+import { PuzzlePage } from "./PuzzlePage";
 
 const myRender = (initialState) => {
   const routes = [
     { path: "/", element: <RouterTestComponent /> },
-    { path: "/puzzle", element: <Puzzle /> },
+    { path: "/puzzle", element: <PuzzlePage /> },
   ];
   const initialEntries = [
     {
@@ -20,8 +20,8 @@ const myRender = (initialState) => {
   return render(<RouterProvider router={router} />);
 };
 
-describe("happy path scenarios", () => {
-  test("PuzzlePage: displays title and author in header", async () => {
+describe("PuzzlePage happy path scenarios", () => {
+  test("displays title and author in header", async () => {
     myRender({
       puzzleUrl:
         "https://www.private-eye.co.uk/pictures/crossword/download/753.puz",
@@ -31,7 +31,7 @@ describe("happy path scenarios", () => {
   });
 });
 
-describe("error scenarios", () => {
+describe("PuzzlePage error scenarios", () => {
   it("no puzzle specified", async () => {
     myRender();
     const alert = await screen.findByRole("alert");

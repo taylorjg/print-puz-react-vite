@@ -6,7 +6,7 @@ import {
   StyledClueNumber,
   StyledClueType,
   StyledTable,
-} from "./Puzzle.styles";
+} from "./PuzzlePage.styles";
 import { Version } from "../../Version";
 import * as U from "../../utils";
 import { LoadingAlert, ErrorAlert } from "./components";
@@ -58,7 +58,7 @@ const makeGridSquares = (parsedPuzzle) => {
   return gridSquares;
 };
 
-export const Puzzle = () => {
+export const PuzzlePage = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
 

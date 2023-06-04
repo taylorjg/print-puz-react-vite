@@ -37,8 +37,8 @@ const checkPageNavigation = async (section, puzzleUrl) => {
   return true;
 };
 
-describe("happy path scenarios", () => {
-  test("HomePage: Current Puzzle section", async () => {
+describe("HomePage happy path scenarios", () => {
+  test("current puzzle section", async () => {
     renderPage();
     await waitForNetworkCallsToComplete();
 
@@ -49,7 +49,7 @@ describe("happy path scenarios", () => {
     ).resolves.toBeTruthy();
   });
 
-  test("HomePage: Puzzle List section", async () => {
+  test("puzzle list section", async () => {
     renderPage();
     await waitForNetworkCallsToComplete();
 
@@ -65,7 +65,7 @@ describe("happy path scenarios", () => {
     ).resolves.toBeTruthy();
   });
 
-  test("HomePage: Explicit Puzzle Url section", async () => {
+  test("explicit puzzle url section", async () => {
     renderPage();
     await waitForNetworkCallsToComplete();
 
