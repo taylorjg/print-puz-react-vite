@@ -57,3 +57,5 @@ jobs:
       - name: Deploy to gh-pages
         if: ${{ (github.ref == 'refs/heads/main') && (steps.regex-match.outputs.match != '') }}
         run: npm run deploy
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
