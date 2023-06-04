@@ -1,8 +1,10 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
+import { rest } from "msw";
 
 import { RouterTestComponent } from "@app/mocks/RouterTestComponent";
+import { server } from "@app/mocks/server";
 
 import { HomePage } from "./HomePage";
 
@@ -15,14 +17,21 @@ const renderPage = () => {
   return render(<RouterProvider router={router} />);
 };
 
-const waitForNetworkCallsToComplete = async () => {
-  expect(
-    await screen.findByDisplayValue(
-      "http://website.com/mock-current-puzzle.puz"
-    )
-  ).toBeInTheDocument();
+const waitForNetworkCallsToComplete = async ({
+  waitForScrapePuzzleUrl = true,
+  waitForListPuzzles = true,
+} = {}) => {
+  if (waitForScrapePuzzleUrl) {
+    expect(
+      await screen.findByDisplayValue(
+        "http://website.com/mock-current-puzzle.puz"
+      )
+    ).toBeInTheDocument();
+  }
 
-  expect(await screen.findByText("mock-puzzle-1.puz")).toBeInTheDocument();
+  if (waitForListPuzzles) {
+    expect(await screen.findByText("mock-puzzle-1.puz")).toBeInTheDocument();
+  }
 };
 
 const checkPageNavigation = async (section, puzzleUrl) => {
@@ -84,5 +93,45 @@ describe("HomePage happy path scenarios", () => {
         "http://website.com/mock-explicit-puzzle.puz"
       )
     ).resolves.toBeTruthy();
+  });
+});
+
+describe("HomePage error scenarios", () => {
+  it("failure of scrapePuzzleUrl", async () => {
+    server.use(
+      rest.get(/\/scrape-puzzle-url$/, (_req, res, ctx) => {
+        return res(ctx.status(500), ctx.json({ error: "Unit test error" }));
+      })
+    );
+
+    renderPage();
+    await waitForNetworkCallsToComplete({ waitForScrapePuzzleUrl: false });
+
+    const section = screen.getByTestId("current-puzzle");
+
+    expect(await within(section).findByTestId("ErrorIcon")).toBeInTheDocument();
+
+    expect(
+      within(section).getByTitle("Request failed with status code 500")
+    ).toBeInTheDocument();
+  });
+
+  it("failure of listPuzzles", async () => {
+    server.use(
+      rest.get(/\/list-puzzles$/, (_req, res, ctx) => {
+        return res(ctx.status(500), ctx.json({ error: "Unit test error" }));
+      })
+    );
+
+    renderPage();
+    await waitForNetworkCallsToComplete({ waitForListPuzzles: false });
+
+    const section = screen.getByTestId("puzzle-list");
+
+    expect(await within(section).findByTestId("ErrorIcon")).toBeInTheDocument();
+
+    expect(
+      within(section).getByTitle("Request failed with status code 500")
+    ).toBeInTheDocument();
   });
 });
