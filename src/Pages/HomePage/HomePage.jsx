@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Container, MenuItem, Select, TextField } from "@mui/material";
 
@@ -15,49 +15,22 @@ import {
 } from "./HomePage.styles";
 
 export const HomePage = () => {
-  const mountedRef = useRef(false);
   const [currentPuzzle, setCurrentPuzzleUrl] = useState("");
   const [puzzles, setPuzzles] = useState([]);
   const [selectedPuzzle, setSelectedPuzzle] = useState("");
   const [explicitPuzzle, setExplicitPuzzle] = useState("");
-  const [scrapePuzzleUrlLoading, setScrapePuzzleUrlLoading] = useState(false);
-  const [scrapePuzzleUrlErrorMessage, setScrapePuzzleUrlErrorMessage] =
-    useState();
-  const [listPuzzlesLoading, setListPuzzlesLoading] = useState(false);
-  const [listPuzzlesErrorMessage, setListPuzzlesErrorMessage] = useState();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (mountedRef.current) return;
-    mountedRef.current = true;
-    const scrapePuzzleUrlAsync = async () => {
-      try {
-        setScrapePuzzleUrlLoading(true);
-        const puzzleUrl = await scrapePuzzleUrl();
-        setCurrentPuzzleUrl(puzzleUrl);
-      } catch (error) {
-        setScrapePuzzleUrlErrorMessage(error.message);
-      } finally {
-        setScrapePuzzleUrlLoading(false);
-      }
-    };
-    const listPuzzlesAsync = async () => {
-      try {
-        setListPuzzlesLoading(true);
-        const puzzles = await listPuzzles();
-        setPuzzles(puzzles);
-        if (puzzles.length > 0) {
-          setSelectedPuzzle(puzzles[0].url);
-        }
-      } catch (error) {
-        setListPuzzlesErrorMessage(error.message);
-      } finally {
-        setListPuzzlesLoading(false);
-      }
-    };
-    scrapePuzzleUrlAsync();
-    listPuzzlesAsync();
-  }, []);
+  const onScrapePuzzleUrlSuccess = (puzzleUrl) => {
+    setCurrentPuzzleUrl(puzzleUrl);
+  };
+
+  const onListPuzzlesSuccess = (puzzles) => {
+    setPuzzles(puzzles);
+    if (puzzles.length > 0) {
+      setSelectedPuzzle(puzzles[0].url);
+    }
+  };
 
   const onViewCurrentPuzzleUrl = () => {
     const state = { puzzleUrl: currentPuzzle };
@@ -94,8 +67,8 @@ export const HomePage = () => {
                 View Puzzle
               </Button>
               <DataFetchProgress
-                loading={scrapePuzzleUrlLoading}
-                errorMessage={scrapePuzzleUrlErrorMessage}
+                fetchData={scrapePuzzleUrl}
+                onSuccess={onScrapePuzzleUrlSuccess}
               />
             </StyledControls>
           </StyledSection>
@@ -129,8 +102,8 @@ export const HomePage = () => {
                 View Puzzle
               </Button>
               <DataFetchProgress
-                loading={listPuzzlesLoading}
-                errorMessage={listPuzzlesErrorMessage}
+                fetchData={listPuzzles}
+                onSuccess={onListPuzzlesSuccess}
               />
             </StyledControls>
           </StyledSection>
