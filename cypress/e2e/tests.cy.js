@@ -35,3 +35,33 @@ describe("happy path scenarios", () => {
     cy.findByText("Cyclops");
   });
 });
+
+describe("error scenarios", () => {
+  it("no puzzle url", () => {
+    cy.visit("/#/puzzle");
+    cy.findByRole("alert").within(() => {
+      cy.findByText("No puzzle specified.");
+      cy.findByText("Return Home").click();
+    });
+    cy.location("pathname").should("eq", "/print-puz-react-vite/");
+    cy.location("hash").should("eq", "#/");
+  });
+
+  it("read or parse failure", () => {
+    cy.visit("/");
+    cy.findByTestId("explicit-puzzle-url").within(() => {
+      cy.findByLabelText("Puzzle Url").type(
+        "https://www.private-eye.co.uk/pictures/crossword/download/bogus.puz"
+      );
+      cy.findByText("View Puzzle").click();
+    });
+    cy.location("pathname").should("eq", "/print-puz-react-vite/");
+    cy.location("hash").should("eq", "#/puzzle");
+    cy.findByRole("alert").within(() => {
+      cy.findByText("Failed to read or parse puzzle.");
+      cy.findByText("Return Home").click();
+    });
+    cy.location("pathname").should("eq", "/print-puz-react-vite/");
+    cy.location("hash").should("eq", "#/");
+  });
+});
