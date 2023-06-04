@@ -1,8 +1,10 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
+
+import { RouterTestComponent } from "@app/mocks/RouterTestComponent";
+
 import { HomePage } from "./HomePage";
-import { RouterTestComponent } from "../../mocks/RouterTestComponent";
 
 const renderPage = () => {
   const routes = [

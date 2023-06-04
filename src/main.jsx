@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createHashRouter, RouterProvider } from "react-router-dom";
-import { HomePage, PuzzlePage } from "./Pages";
+
+import { HomePage, PuzzlePage } from "@app/Pages";
 
 const router = createHashRouter([
   {

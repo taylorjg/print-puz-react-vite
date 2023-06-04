@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Container, MenuItem, Select, TextField } from "@mui/material";
-import { listPuzzles, scrapePuzzleUrl } from "../../serverless";
-import { Version } from "../../Version";
+
+import { listPuzzles, scrapePuzzleUrl } from "@app/serverless";
+import { Version } from "@app/Version";
+
 import {
   StyledPageWrapper,
   StyledSection,

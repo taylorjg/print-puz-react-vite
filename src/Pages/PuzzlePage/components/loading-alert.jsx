@@ -1,4 +1,5 @@
 import { Alert } from "@mui/material";
+
 import { StyledAlertWrapper } from "./common.styles";
 
 export const LoadingAlert = () => {

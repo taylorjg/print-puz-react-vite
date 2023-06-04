@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { Alert, Button } from "@mui/material";
+
 import { StyledAlertWrapper } from "./common.styles";
 
 export const ErrorAlert = ({ message, onReturnHome }) => {

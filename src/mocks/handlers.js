@@ -1,4 +1,5 @@
 import { rest } from "msw";
+
 import puzzle753 from "./puzzle753.json";
 
 const mockScrapePuzzleUrlHandler = (_req, res, ctx) => {
