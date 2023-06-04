@@ -37,7 +37,7 @@ describe("happy path scenarios", () => {
 });
 
 describe("error scenarios", () => {
-  it("no puzzle url", () => {
+  it("no puzzle specified", () => {
     cy.visit("/#/puzzle");
     cy.findByRole("alert").within(() => {
       cy.findByText("No puzzle specified.");
