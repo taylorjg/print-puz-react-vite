@@ -23,14 +23,3 @@ export const StyledClue = styled.span`
   font-family: arial, helvetica;
   font-size: 10pt;
 `;
-
-export const StyledMessageWrapper = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;

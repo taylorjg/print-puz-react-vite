@@ -1,17 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-import PropTypes from "prop-types";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Alert, Button } from "@mui/material";
 import { parsePuzzle, extractErrorMessage } from "../../serverless";
 import {
   StyledClue,
   StyledClueNumber,
   StyledClueType,
-  StyledMessageWrapper,
   StyledTable,
 } from "./Puzzle.styles";
 import { Version } from "../../Version";
 import * as U from "../../utils";
+import { LoadingAlert, ErrorAlert } from "./components";
 
 const findClueNumber = (parsedPuzzle, row, col) => {
   const matchingAcrossClue = parsedPuzzle.acrossClues.find(
@@ -60,48 +58,14 @@ const makeGridSquares = (parsedPuzzle) => {
   return gridSquares;
 };
 
-const Loading = () => {
-  return (
-    <StyledMessageWrapper>
-      <Alert severity="info" variant="filled">
-        Loading puzzle...
-      </Alert>
-    </StyledMessageWrapper>
-  );
-};
-
-const OnError = ({ message, onReturnHome }) => {
-  return (
-    <StyledMessageWrapper>
-      <Alert
-        sx={{ width: "33%" }}
-        severity="error"
-        variant="filled"
-        action={
-          <Button color="inherit" onClick={onReturnHome}>
-            Return Home
-          </Button>
-        }
-      >
-        {message}
-      </Alert>
-    </StyledMessageWrapper>
-  );
-};
-
-OnError.propTypes = {
-  message: PropTypes.string.isRequired,
-  onReturnHome: PropTypes.func.isRequired,
-};
-
 export const Puzzle = () => {
   const { state } = useLocation();
+  const navigate = useNavigate();
 
-  const mountedRef = useRef(false);
   const [errorMessage, setErrorMessage] = useState();
   const [parsedPuzzle, setParsedPuzzle] = useState();
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  const mountedRef = useRef(false);
 
   useEffect(() => {
     if (mountedRef.current) return;
@@ -127,17 +91,17 @@ export const Puzzle = () => {
 
   if (!state?.puzzleUrl) {
     return (
-      <OnError message="No puzzle specified." onReturnHome={onReturnHome} />
+      <ErrorAlert message="No puzzle specified." onReturnHome={onReturnHome} />
     );
   }
 
   if (loading) {
-    return <Loading />;
+    return <LoadingAlert />;
   }
 
   if (errorMessage || !parsedPuzzle) {
     return (
-      <OnError
+      <ErrorAlert
         message="Failed to read or parse puzzle."
         onReturnHome={onReturnHome}
       />
