@@ -1,12 +1,12 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
-import { Home } from "./Home";
+import { HomePage } from "./HomePage";
 import { RouterTestComponent } from "../../mocks/RouterTestComponent";
 
 const renderPage = () => {
   const routes = [
-    { path: "/", element: <Home /> },
+    { path: "/", element: <HomePage /> },
     { path: "/puzzle", element: <RouterTestComponent /> },
   ];
   const router = createMemoryRouter(routes);

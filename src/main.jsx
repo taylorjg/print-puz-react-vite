@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createHashRouter, RouterProvider } from "react-router-dom";
-import { Home, Puzzle } from "./Pages";
+import { HomePage, Puzzle } from "./Pages";
 
 const router = createHashRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <HomePage />,
   },
   {
     path: "/puzzle",

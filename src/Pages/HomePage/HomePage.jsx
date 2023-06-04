@@ -7,9 +7,9 @@ import {
   StyledPageWrapper,
   StyledSection,
   StyledSections,
-} from "./Home.styles";
+} from "./HomePage.styles";
 
-export const Home = () => {
+export const HomePage = () => {
   const mountedRef = useRef(false);
   const [currentPuzzle, setCurrentPuzzleUrl] = useState("");
   const [puzzles, setPuzzles] = useState([]);
