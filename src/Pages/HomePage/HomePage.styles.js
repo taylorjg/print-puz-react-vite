@@ -31,3 +31,10 @@ export const StyledSection = styled(Box)`
   border-radius: 0.25rem;
   padding: 0.5rem;
 `;
+
+export const StyledControls = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+`;

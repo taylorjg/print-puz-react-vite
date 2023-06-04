@@ -5,7 +5,10 @@ import { Button, Container, MenuItem, Select, TextField } from "@mui/material";
 import { listPuzzles, scrapePuzzleUrl } from "@app/serverless";
 import { Version } from "@app/Version";
 
+import { DataFetchProgress } from "./components";
+
 import {
+  StyledControls,
   StyledPageWrapper,
   StyledSection,
   StyledSections,
@@ -17,20 +20,39 @@ export const HomePage = () => {
   const [puzzles, setPuzzles] = useState([]);
   const [selectedPuzzle, setSelectedPuzzle] = useState("");
   const [explicitPuzzle, setExplicitPuzzle] = useState("");
+  const [scrapePuzzleUrlLoading, setScrapePuzzleUrlLoading] = useState(false);
+  const [scrapePuzzleUrlErrorMessage, setScrapePuzzleUrlErrorMessage] =
+    useState();
+  const [listPuzzlesLoading, setListPuzzlesLoading] = useState(false);
+  const [listPuzzlesErrorMessage, setListPuzzlesErrorMessage] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (mountedRef.current) return;
     mountedRef.current = true;
     const scrapePuzzleUrlAsync = async () => {
-      const puzzleUrl = await scrapePuzzleUrl();
-      setCurrentPuzzleUrl(puzzleUrl);
+      try {
+        setScrapePuzzleUrlLoading(true);
+        const puzzleUrl = await scrapePuzzleUrl();
+        setCurrentPuzzleUrl(puzzleUrl);
+      } catch (error) {
+        setScrapePuzzleUrlErrorMessage(error.message);
+      } finally {
+        setScrapePuzzleUrlLoading(false);
+      }
     };
     const listPuzzlesAsync = async () => {
-      const puzzles = await listPuzzles();
-      setPuzzles(puzzles);
-      if (puzzles.length > 0) {
-        setSelectedPuzzle(puzzles[0].url);
+      try {
+        setListPuzzlesLoading(true);
+        const puzzles = await listPuzzles();
+        setPuzzles(puzzles);
+        if (puzzles.length > 0) {
+          setSelectedPuzzle(puzzles[0].url);
+        }
+      } catch (error) {
+        setListPuzzlesErrorMessage(error.message);
+      } finally {
+        setListPuzzlesLoading(false);
       }
     };
     scrapePuzzleUrlAsync();
@@ -64,9 +86,18 @@ export const HomePage = () => {
               value={currentPuzzle}
               readOnly
             />
-            <Button onClick={onViewCurrentPuzzleUrl} disabled={!currentPuzzle}>
-              View Puzzle
-            </Button>
+            <StyledControls>
+              <Button
+                onClick={onViewCurrentPuzzleUrl}
+                disabled={!currentPuzzle}
+              >
+                View Puzzle
+              </Button>
+              <DataFetchProgress
+                loading={scrapePuzzleUrlLoading}
+                errorMessage={scrapePuzzleUrlErrorMessage}
+              />
+            </StyledControls>
           </StyledSection>
 
           <StyledSection data-testid="puzzle-list">
@@ -90,12 +121,18 @@ export const HomePage = () => {
                 );
               })}
             </Select>
-            <Button
-              onClick={onViewPuzzleListSelection}
-              disabled={!selectedPuzzle}
-            >
-              View Puzzle
-            </Button>
+            <StyledControls>
+              <Button
+                onClick={onViewPuzzleListSelection}
+                disabled={!selectedPuzzle}
+              >
+                View Puzzle
+              </Button>
+              <DataFetchProgress
+                loading={listPuzzlesLoading}
+                errorMessage={listPuzzlesErrorMessage}
+              />
+            </StyledControls>
           </StyledSection>
 
           <StyledSection data-testid="explicit-puzzle-url">
