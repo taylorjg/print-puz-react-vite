@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Container, MenuItem, Select, TextField } from "@mui/material";
+import {
+  Button,
+  Container,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
 
 import { listPuzzles, scrapePuzzleUrl } from "@app/serverless";
 import { Version } from "@app/Version";
@@ -52,6 +59,14 @@ export const HomePage = () => {
       <Container maxWidth="sm">
         <StyledSections>
           <StyledSection data-testid="current-puzzle">
+            <Typography>
+              Scrape a link to the .puz binary file of the latest crossword from
+              the&nbsp;
+              <a href="https://www.private-eye.co.uk/crossword">
+                crossword puzzle page
+              </a>
+              &nbsp;of the Private Eye website.
+            </Typography>
             <TextField
               fullWidth
               size="small"
@@ -74,6 +89,14 @@ export const HomePage = () => {
           </StyledSection>
 
           <StyledSection data-testid="puzzle-list">
+            <Typography>
+              Scrape a list of previous crossword puzzles from an index of
+              the&nbsp;
+              <a href="https://www.private-eye.co.uk/pictures/crossword/download/">
+                download page
+              </a>
+              &nbsp;of the Private Eye website.
+            </Typography>
             <Select
               fullWidth
               size="small"
@@ -109,6 +132,9 @@ export const HomePage = () => {
           </StyledSection>
 
           <StyledSection data-testid="explicit-puzzle-url">
+            <Typography>
+              Enter an arbitrary link to a .puz binrary file.
+            </Typography>
             <TextField
               fullWidth
               size="small"

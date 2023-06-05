@@ -8,11 +8,13 @@ _TODO_
 
 * JavaScript
 * React
+* React Router 6
 * Material UI
 * Vite
 * Vitest + React Testing Library
 * Cypress + Cypress Testing Library
 * GitHub Actions
+* Serverless Backend (see separate [repo](https://github.com/taylorjg/print-puz-serverless))
 
 # Screenshots
 
