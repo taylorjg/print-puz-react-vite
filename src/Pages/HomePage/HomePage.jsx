@@ -89,7 +89,7 @@ export const HomePage = () => {
 
           <StyledSection data-testid="puzzle-list">
             <Typography>
-              Select a puzzle from a list scraped from an index of the&nbsp;
+              Select a puzzle from a list scraped from the&nbsp;
               <a href="https://www.private-eye.co.uk/pictures/crossword/download/">
                 download page
               </a>
