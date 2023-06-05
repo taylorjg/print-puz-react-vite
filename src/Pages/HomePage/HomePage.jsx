@@ -60,8 +60,7 @@ export const HomePage = () => {
         <StyledSections>
           <StyledSection data-testid="current-puzzle">
             <Typography>
-              Scrape a link to the .puz binary file of the latest crossword from
-              the&nbsp;
+              Use the following link scraped from the current&nbsp;
               <a href="https://www.private-eye.co.uk/crossword">
                 crossword puzzle page
               </a>
@@ -90,8 +89,7 @@ export const HomePage = () => {
 
           <StyledSection data-testid="puzzle-list">
             <Typography>
-              Scrape a list of previous crossword puzzles from an index of
-              the&nbsp;
+              Select a puzzle from a list scraped from an index of the&nbsp;
               <a href="https://www.private-eye.co.uk/pictures/crossword/download/">
                 download page
               </a>
@@ -133,7 +131,7 @@ export const HomePage = () => {
 
           <StyledSection data-testid="explicit-puzzle-url">
             <Typography>
-              Enter an arbitrary link to a .puz binrary file.
+              Enter an arbitrary link to a .puz binary file.
             </Typography>
             <TextField
               fullWidth
