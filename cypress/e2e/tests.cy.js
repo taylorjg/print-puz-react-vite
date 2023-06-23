@@ -13,6 +13,8 @@ describe("happy path scenarios", () => {
     cy.visit("/");
     cy.findByTestId("puzzle-list").within(() => {
       cy.findByText("300.puz");
+    });
+    cy.findByTestId("puzzle-list").within(() => {
       cy.findByLabelText("Puzzles")
         .findByRole("button")
         .trigger("mousedown", { button: 0 });
