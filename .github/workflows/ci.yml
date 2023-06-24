@@ -23,11 +23,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: cypress-io/github-action@v5
         with:
-          build: npm run build
-          # We need to create a symbolic link in the dist folder because
-          # of the "base" setting in vite.config.js:
-          #   base: "/print-puz-react-vite"
-          start: ln -s . dist/print-puz-react-vite, npx serve dist -p 5173
+          start: npm run dev
           # The "wait-on" value needs to match "baseUrl" in cypress.config.js.
           wait-on: "http://localhost:5173/print-puz-react-vite"
           browser: chrome
