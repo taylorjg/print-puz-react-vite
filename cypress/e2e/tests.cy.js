@@ -12,16 +12,16 @@ describe("happy path scenarios", () => {
   it("select a puzzle url from the list", () => {
     cy.visit("/");
     cy.findByTestId("puzzle-list").within(() => {
-      cy.findByText("300.puz");
+      cy.findByText(/.*\.puz \(.*\)/);
     });
     cy.findByTestId("puzzle-list").within(() => {
       cy.findByLabelText("Puzzles")
         .findByRole("button")
         .trigger("mousedown", { button: 0 });
     });
-    cy.findByRole("listbox").findByText("312.puz").click();
+    cy.findByRole("listbox").findByText("725.puz (Tue Mar 29 2022)").click();
     cy.findByTestId("puzzle-list").findByText("View Puzzle").click();
-    cy.findByText("Eye 1157/312 Apr 2006");
+    cy.findByText("Eye 725/1570");
     cy.findByText("Cyclops");
   });
 

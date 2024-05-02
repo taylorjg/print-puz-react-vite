@@ -33,6 +33,13 @@ export const HomePage = () => {
   };
 
   const onListPuzzlesSuccess = (puzzles) => {
+    puzzles = puzzles
+      .filter(({ timestamp }) => timestamp !== "2017-04-24")
+      .filter(
+        ({ url, timestamp }) =>
+          !(url.endsWith("783.puz") && timestamp === "2022-10-07")
+      )
+      .reverse();
     setPuzzles(puzzles);
     if (puzzles.length > 0) {
       setSelectedPuzzle(puzzles[0].url);
@@ -105,12 +112,12 @@ export const HomePage = () => {
               }}
             >
               {puzzles.map((puzzle) => {
-                const { url } = puzzle;
+                const { url, timestamp } = puzzle;
                 const pos = url.lastIndexOf("/");
                 const name = url.substring(pos + 1);
                 return (
                   <MenuItem key={url} value={url}>
-                    {name}
+                    {name} ({new Date(timestamp).toDateString()})
                   </MenuItem>
                 );
               })}

@@ -30,7 +30,9 @@ const waitForNetworkCallsToComplete = async ({
   }
 
   if (waitForListPuzzles) {
-    expect(await screen.findByText("mock-puzzle-1.puz")).toBeInTheDocument();
+    expect(
+      await screen.findByText("mock-puzzle-3.puz (Fri Mar 03 2023)")
+    ).toBeInTheDocument();
   }
 };
 
@@ -69,7 +71,9 @@ describe("HomePage happy path scenarios", () => {
     const selectComponent = within(section).getByLabelText("Puzzles");
     fireEvent.mouseDown(within(selectComponent).getByRole("button"));
     const listbox = screen.getByRole("listbox");
-    userEvent.click(within(listbox).getByText("mock-puzzle-2.puz"));
+    userEvent.click(
+      within(listbox).getByText("mock-puzzle-2.puz (Thu Feb 02 2023)")
+    );
 
     await expect(
       checkPageNavigation(section, "http://website.com/mock-puzzle-2.puz")
