@@ -69,8 +69,8 @@ These won't move with `npm update` because semver ranges cap them:
 
 | Package | From → To | Notes |
 |---------|-----------|-------|
-| `jsdom` | 22 → 29 | Likely fixes Node 24 test failures; may need Vitest config tweaks |
-| `prettier` | 2 → 3 | Run `npx prettier --write .` once; check `.prettierrc` if any |
+| `jsdom` | 22 → 26 | **26.1.0** is the max compatible with Vitest 0.31 + Node 18 CI; **29** needs Vitest 4 (Phase 4) |
+| `prettier` | 2 → 3 | Run `npx prettier --write .` once; also bump `eslint-plugin-prettier` to ^5 |
 
 Do these **before** the Vite/Vitest jump so there is a stable test baseline.
 
@@ -176,7 +176,7 @@ flowchart LR
 |-------|--------|------------|
 | 1 — `npm update` | Done | `package-lock.json` only; build + lint pass; MUI 5.18 Select uses `combobox` role — fixed in `HomePage.test.jsx` |
 | 2 — Minor range bumps | Done | `eslint-plugin-react-refresh` capped at `0.4.26` (ESLint 8); `@testing-library/cypress` 10.1.3; `gh-pages` 6.3.0 |
-| 3 — jsdom + prettier | Not started | |
+| 3 — jsdom + prettier | Done | jsdom 26.1.0 (29 blocked until Phase 4); prettier 3.8 + eslint-plugin-prettier 5.5 |
 | 4 — Vite/Vitest | Not started | |
 | 5 — MSW 2 | Not started | |
 | 6 — ESLint flat config | Not started | |
