@@ -56,7 +56,7 @@ These won't move with `npm update` because semver ranges cap them:
 
 | Package | Current range | Bump to | Why it's easy |
 |---------|---------------|---------|---------------|
-| `eslint-plugin-react-refresh` | `^0.3.4` | `^0.5.3` | Small plugin, no config change expected |
+| `eslint-plugin-react-refresh` | `^0.3.4` | `^0.4.26` | Latest compatible with ESLint 8 (`0.5.x` needs ESLint 9 — defer to Phase 6) |
 | `@testing-library/cypress` | `^9.0.0` | `^10.1.3` | Test helper only |
 | `gh-pages` | `^5.0.0` | `^6.3.0` | Deploy script unchanged (`gh-pages -d dist`) |
 
@@ -175,7 +175,7 @@ flowchart LR
 | Phase | Status | PR / notes |
 |-------|--------|------------|
 | 1 — `npm update` | Done | `package-lock.json` only; build + lint pass; MUI 5.18 Select uses `combobox` role — fixed in `HomePage.test.jsx` |
-| 2 — Minor range bumps | Not started | |
+| 2 — Minor range bumps | Done | `eslint-plugin-react-refresh` capped at `0.4.26` (ESLint 8); `@testing-library/cypress` 10.1.3; `gh-pages` 6.3.0 |
 | 3 — jsdom + prettier | Not started | |
 | 4 — Vite/Vitest | Not started | |
 | 5 — MSW 2 | Not started | |
