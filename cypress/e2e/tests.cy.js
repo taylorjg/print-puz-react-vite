@@ -16,7 +16,7 @@ describe("happy path scenarios", () => {
     });
     cy.findByTestId("puzzle-list").within(() => {
       cy.findByLabelText("Puzzles")
-        .findByRole("button")
+        .findByRole("combobox")
         .trigger("mousedown", { button: 0 });
     });
     cy.findByRole("listbox").findByText("725.puz (Tue Mar 29 2022)").click();

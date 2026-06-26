@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import { rest } from "msw";
@@ -8,13 +8,32 @@ import { server } from "@app/mocks/server";
 
 import { HomePage } from "./HomePage";
 
-const renderPage = () => {
+const routerFuture = {
+  v7_startTransition: true,
+  v7_relativeSplatPath: true,
+};
+
+let user;
+
+beforeEach(() => {
+  user = userEvent.setup();
+});
+
+const renderPage = async ({
+  waitForScrapePuzzleUrl = true,
+  waitForListPuzzles = true,
+} = {}) => {
   const routes = [
     { path: "/", element: <HomePage /> },
     { path: "/puzzle", element: <RouterTestComponent /> },
   ];
-  const router = createMemoryRouter(routes);
-  return render(<RouterProvider router={router} />);
+  const router = createMemoryRouter(routes, { future: routerFuture });
+  const view = render(<RouterProvider router={router} future={routerFuture} />);
+  await waitForNetworkCallsToComplete({
+    waitForScrapePuzzleUrl,
+    waitForListPuzzles,
+  });
+  return view;
 };
 
 const waitForNetworkCallsToComplete = async ({
@@ -22,23 +41,23 @@ const waitForNetworkCallsToComplete = async ({
   waitForListPuzzles = true,
 } = {}) => {
   if (waitForScrapePuzzleUrl) {
-    expect(
-      await screen.findByDisplayValue(
-        "http://website.com/mock-current-puzzle.puz"
-      )
-    ).toBeInTheDocument();
+    await screen.findByDisplayValue(
+      "http://website.com/mock-current-puzzle.puz"
+    );
   }
 
   if (waitForListPuzzles) {
-    expect(
-      await screen.findByText("mock-puzzle-3.puz (Fri Mar 03 2023)")
-    ).toBeInTheDocument();
+    await screen.findByText("mock-puzzle-3.puz (Fri Mar 03 2023)");
   }
+
+  await waitFor(() => {
+    expect(screen.queryAllByRole("progressbar")).toHaveLength(0);
+  });
 };
 
 const checkPageNavigation = async (section, puzzleUrl) => {
   const viewPuzzleButton = within(section).getByText("View Puzzle");
-  userEvent.click(viewPuzzleButton);
+  await user.click(viewPuzzleButton);
 
   const expectedPathname = "/puzzle";
   const expectedState = JSON.stringify({ puzzleUrl });
@@ -52,8 +71,7 @@ const checkPageNavigation = async (section, puzzleUrl) => {
 
 describe("HomePage happy path scenarios", () => {
   test("current puzzle section", async () => {
-    renderPage();
-    await waitForNetworkCallsToComplete();
+    await renderPage();
 
     const section = screen.getByTestId("current-puzzle");
 
@@ -63,15 +81,14 @@ describe("HomePage happy path scenarios", () => {
   });
 
   test("puzzle list section", async () => {
-    renderPage();
-    await waitForNetworkCallsToComplete();
+    await renderPage();
 
     const section = screen.getByTestId("puzzle-list");
 
     const selectComponent = within(section).getByLabelText("Puzzles");
-    fireEvent.mouseDown(within(selectComponent).getByRole("button"));
-    const listbox = screen.getByRole("listbox");
-    userEvent.click(
+    await user.click(within(selectComponent).getByRole("combobox"));
+    const listbox = await screen.findByRole("listbox");
+    await user.click(
       within(listbox).getByText("mock-puzzle-2.puz (Thu Feb 02 2023)")
     );
 
@@ -81,12 +98,11 @@ describe("HomePage happy path scenarios", () => {
   });
 
   test("explicit puzzle url section", async () => {
-    renderPage();
-    await waitForNetworkCallsToComplete();
+    await renderPage();
 
     const section = screen.getByTestId("explicit-puzzle-url");
 
-    await userEvent.type(
+    await user.type(
       within(section).getByLabelText("Puzzle Url"),
       "http://website.com/mock-explicit-puzzle.puz"
     );
@@ -108,8 +124,7 @@ describe("HomePage error scenarios", () => {
       })
     );
 
-    renderPage();
-    await waitForNetworkCallsToComplete({ waitForScrapePuzzleUrl: false });
+    await renderPage({ waitForScrapePuzzleUrl: false });
 
     const section = screen.getByTestId("current-puzzle");
 
@@ -127,8 +142,7 @@ describe("HomePage error scenarios", () => {
       })
     );
 
-    renderPage();
-    await waitForNetworkCallsToComplete({ waitForListPuzzles: false });
+    await renderPage({ waitForListPuzzles: false });
 
     const section = screen.getByTestId("puzzle-list");
 

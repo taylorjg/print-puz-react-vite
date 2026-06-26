@@ -11,7 +11,7 @@ export const ErrorAlert = ({ message, onReturnHome }) => {
         severity="error"
         variant="filled"
         action={
-          <Button color="inherit" onClick={onReturnHome}>
+          <Button color="inherit" disableRipple onClick={onReturnHome}>
             Return Home
           </Button>
         }
