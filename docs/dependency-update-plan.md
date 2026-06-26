@@ -16,7 +16,7 @@ Plan for bringing outdated dependencies up to date, ordered from easiest to hard
 | Mocking | MSW 1.2 (`rest` API) | MSW 2 | API rewrite |
 | E2E | Cypress 12 | Cypress 15 | Major |
 
-**Note:** Unit tests may fail locally on Node 24 (`AbortSignal` / jsdom / react-router). CI uses Node 18.16 — use Node 18 when verifying updates locally if needed.
+**Note:** Project targets **Node 24** (`.nvmrc` and CI). Use `nvm use` before running tests locally.
 
 ## Verification Checklist
 
@@ -69,7 +69,7 @@ These won't move with `npm update` because semver ranges cap them:
 
 | Package | From → To | Notes |
 |---------|-----------|-------|
-| `jsdom` | 22 → 26 | **26.1.0** is the max compatible with Vitest 0.31 + Node 18 CI; **29** needs Vitest 4 (Phase 4) |
+| `jsdom` | 22 → 29 | **29.1.1** with Vitest 4 + Node 24 (fails on Node 18 with `ERR_REQUIRE_ESM`) |
 | `prettier` | 2 → 3 | Run `npx prettier --write .` once; also bump `eslint-plugin-prettier` to ^5 |
 
 Do these **before** the Vite/Vitest jump so there is a stable test baseline.
@@ -96,6 +96,12 @@ Suggested path (incremental, not straight to 8):
 3. Vite 7/8 + Vitest 3/4 + plugin-react 6 (only after earlier steps pass)
 
 `vite.config.js` is simple today, so breakage should be limited, but Vitest 0.31 → 1+ may change globals/setup behavior.
+
+**Status (implemented):** Vite 6 + Vitest 4 + `@vitejs/plugin-react` 4.7. Skipped Vite 5/7/8 intermediate steps — this combo passes build, lint, and tests on Node 24.
+
+- `jsdom` **29.1.1** (requires Node 24; upgraded after `.nvmrc`/CI bump)
+- `eslint-plugin-vitest@0.5` breaks legacy `.eslintrc.cjs` — left at 0.2.8 until Phase 6 (ESLint flat config)
+- `vite.config.js` now imports `defineConfig` from `vitest/config`
 
 **Effort:** 2–4 hours  
 **Risk:** Medium-high
@@ -150,8 +156,7 @@ ESLint 9+ expects **flat config** (`eslint.config.js`). `.eslintrc.cjs` would ne
 
 Also update CI while here:
 
-- `.github/workflows/ci.yml`: Node 18.16 → 20 LTS, `actions/checkout@v4`, `setup-node@v4`
-- Cypress container: `node16` → current `cypress/browsers` image
+- ~~`.github/workflows/ci.yml`: Node 18.16 → 20 LTS~~ **Done:** Node 24, `actions/checkout@v4`, `setup-node@v4`, `cypress/browsers:24.14.0`
 
 **Effort:** Days, not hours  
 **Risk:** High
@@ -176,8 +181,8 @@ flowchart LR
 |-------|--------|------------|
 | 1 — `npm update` | Done | `package-lock.json` only; build + lint pass; MUI 5.18 Select uses `combobox` role — fixed in `HomePage.test.jsx` |
 | 2 — Minor range bumps | Done | `eslint-plugin-react-refresh` capped at `0.4.26` (ESLint 8); `@testing-library/cypress` 10.1.3; `gh-pages` 6.3.0 |
-| 3 — jsdom + prettier | Done | jsdom 26.1.0 (29 blocked until Phase 4); prettier 3.8 + eslint-plugin-prettier 5.5 |
-| 4 — Vite/Vitest | Not started | |
+| 3 — jsdom + prettier | Done | prettier 3.8 + eslint-plugin-prettier 5.5; jsdom now 29.1.1 (see Node 24 bump) |
+| 4 — Vite/Vitest | Done | Vite 6.4 + Vitest 4.1 + plugin-react 4.7 + jsdom 29; Node 24 in `.nvmrc`/CI; `vitest/config` in vite.config.js |
 | 5 — MSW 2 | Not started | |
 | 6 — ESLint flat config | Not started | |
 | 7 — Framework majors | Not started | |
