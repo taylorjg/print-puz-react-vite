@@ -41,14 +41,14 @@ const makeGridSquares = (parsedPuzzle) => {
       const makeImageSrc = () => {
         const isBlackSquare = parsedPuzzle.grid[row][col] === "X";
         if (isBlackSquare) {
-          return "black_cell.gif";
+          return U.publicAssetUrl("black_cell.gif");
         } else {
           const clueNumber = findClueNumber(parsedPuzzle, row, col);
           const suffix = makeSuffix();
           if (clueNumber) {
-            return `${clueNumber}_number${suffix}.gif`;
+            return U.publicAssetUrl(`${clueNumber}_number${suffix}.gif`);
           } else {
-            return `white_cell${suffix}.gif`;
+            return U.publicAssetUrl(`white_cell${suffix}.gif`);
           }
         }
       };
@@ -121,7 +121,7 @@ export const PuzzlePage = () => {
               {parsedPuzzle.puzzle.title}
               <br />
               <div style={{ width: "250px", height: "1px" }}>
-                <img src="clear.gif" />
+                <img src={U.publicAssetUrl("clear.gif")} />
               </div>
             </td>
             <td align="right" style={{ backgroundColor: "#ffffff" }}>
@@ -131,7 +131,7 @@ export const PuzzlePage = () => {
           <tr>
             <td colSpan="2">
               <div style={{ width: "1px", height: "2px" }}>
-                <img src="clear.gif" />
+                <img src={U.publicAssetUrl("clear.gif")} />
               </div>
             </td>
           </tr>
@@ -144,7 +144,7 @@ export const PuzzlePage = () => {
         <tbody>
           <tr>
             <td>
-              <img src="clear.gif" width="1" height="3" />
+              <img src={U.publicAssetUrl("clear.gif")} width="1" height="3" />
             </td>
           </tr>
           <tr>
