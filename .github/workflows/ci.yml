@@ -4,7 +4,7 @@ on: push
 jobs:
   run-unit-tests:
     name: Run Unit Tests (Vitest)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -17,12 +17,15 @@ jobs:
 
   run-e2e-tests:
     name: Run End-to-End Tests (Cypress)
-    runs-on: ubuntu-latest
-    container: cypress/browsers:24.14.0
+    runs-on: ubuntu-24.04
+    container:
+      image: cypress/browsers:24.14.0
+      options: --user 1001
     steps:
       - uses: actions/checkout@v4
-      - uses: cypress-io/github-action@v5
+      - uses: cypress-io/github-action@v7
         with:
+          install-command: npm clean-install
           start: npm run dev
           # The "wait-on" value needs to match "baseUrl" in cypress.config.js.
           wait-on: "http://localhost:5173/print-puz-react-vite"
@@ -32,7 +35,7 @@ jobs:
     name: Deploy to gh-pages
     if: github.ref_type == 'tag'
     needs: [run-unit-tests, run-e2e-tests]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: write
     steps:
