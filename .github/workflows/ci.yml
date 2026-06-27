@@ -21,7 +21,7 @@ jobs:
     name: Run End-to-End Tests (Cypress)
     runs-on: ubuntu-24.04
     container:
-      image: cypress/browsers:24.14.0
+      image: cypress/browsers:24.17.0
       options: --user 1001
     steps:
       - uses: actions/checkout@v4

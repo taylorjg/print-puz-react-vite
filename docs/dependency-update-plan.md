@@ -192,4 +192,4 @@ flowchart LR
 | 4 — Vite/Vitest | Done | Vite 6.4 + Vitest 4.1 + plugin-react 4.7 + jsdom 29; Node 24 in `.nvmrc`/CI; `vitest/config` in vite.config.js |
 | 5 — MSW 2 | Done | `rest` → `http` + `HttpResponse`; wildcard URL patterns for API host |
 | 6 — ESLint flat config | Done | ESLint 9.39 flat config; `@vitest/eslint-plugin` replaces vitest plugins; react-hooks 5.2 |
-| 7 — Framework majors | In progress | React **19.2.7**; **react-router-dom 7.18**; **MUI 9.1** (Select test queries updated for combobox-as-label); Cypress still pending |
+| 7 — Framework majors | Done | React **19.2.7**; **react-router-dom 7.18**; **MUI 9.1**; **Cypress 15.18**; CI `cypress/browsers:24.17.0` |
