@@ -1,7 +1,7 @@
 import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
-import { rest } from "msw";
+import { http, HttpResponse } from "msw";
 
 import { RouterTestComponent } from "@app/mocks/RouterTestComponent";
 import { server } from "@app/mocks/server";
@@ -119,8 +119,8 @@ describe("HomePage happy path scenarios", () => {
 describe("HomePage error scenarios", () => {
   it("failure of scrapePuzzleUrl", async () => {
     server.use(
-      rest.get(/\/scrape-puzzle-url$/, (_req, res, ctx) => {
-        return res(ctx.status(500), ctx.json({ error: "Unit test error" }));
+      http.get("*/scrape-puzzle-url", () => {
+        return HttpResponse.json({ error: "Unit test error" }, { status: 500 });
       })
     );
 
@@ -137,8 +137,8 @@ describe("HomePage error scenarios", () => {
 
   it("failure of listPuzzles", async () => {
     server.use(
-      rest.get(/\/list-puzzles$/, (_req, res, ctx) => {
-        return res(ctx.status(500), ctx.json({ error: "Unit test error" }));
+      http.get("*/list-puzzles", () => {
+        return HttpResponse.json({ error: "Unit test error" }, { status: 500 });
       })
     );
 

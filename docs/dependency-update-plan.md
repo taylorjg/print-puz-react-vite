@@ -183,6 +183,6 @@ flowchart LR
 | 2 — Minor range bumps | Done | `eslint-plugin-react-refresh` capped at `0.4.26` (ESLint 8); `@testing-library/cypress` 10.1.3; `gh-pages` 6.3.0 |
 | 3 — jsdom + prettier | Done | prettier 3.8 + eslint-plugin-prettier 5.5; jsdom now 29.1.1 (see Node 24 bump) |
 | 4 — Vite/Vitest | Done | Vite 6.4 + Vitest 4.1 + plugin-react 4.7 + jsdom 29; Node 24 in `.nvmrc`/CI; `vitest/config` in vite.config.js |
-| 5 — MSW 2 | Not started | |
+| 5 — MSW 2 | Done | `rest` → `http` + `HttpResponse`; wildcard URL patterns for API host |
 | 6 — ESLint flat config | Not started | |
 | 7 — Framework majors | Not started | |
