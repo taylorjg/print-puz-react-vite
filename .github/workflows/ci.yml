@@ -12,6 +12,8 @@ jobs:
           node-version: "24"
       - name: Clean install
         run: npm clean-install
+      - name: Lint
+        run: npm run lint
       - name: Run unit tests
         run: npm test
 
