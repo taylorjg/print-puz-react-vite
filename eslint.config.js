@@ -42,7 +42,7 @@ export default [
   },
   {
     files: ["**/*.{js,jsx}"],
-    ...reactHooks.configs["recommended-latest"],
+    ...reactHooks.configs.flat.recommended,
   },
   {
     files: ["**/*.{js,jsx}"],
