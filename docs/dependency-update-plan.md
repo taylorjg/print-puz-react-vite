@@ -140,6 +140,13 @@ ESLint 9+ expects **flat config** (`eslint.config.js`). `.eslintrc.cjs` would ne
 - `eslint-plugin-react-hooks` 7.x (React 19 rules)
 - `eslint-plugin-vitest`, `eslint-plugin-cypress` 6.x
 
+**Status (implemented):** ESLint **9.39** with `eslint.config.js` (flat config). Removed `.eslintrc.cjs`.
+
+- `eslint-plugin-vitest` + `eslint-plugin-vitest-globals` → **`@vitest/eslint-plugin`**
+- `eslint-plugin-cypress` **6.4**, `eslint-config-prettier` **10**, `eslint-plugin-react-refresh` **0.5**
+- `eslint-plugin-react-hooks` **5.2** (`recommended-latest`; v7 deferred to Phase 7 React 19)
+- `no-unused-vars` ignores capitalized imports (JSX components) for ESLint 9 compatibility
+
 **Effort:** 2–3 hours  
 **Risk:** High (config rewrite, rule changes)
 
@@ -184,5 +191,5 @@ flowchart LR
 | 3 — jsdom + prettier | Done | prettier 3.8 + eslint-plugin-prettier 5.5; jsdom now 29.1.1 (see Node 24 bump) |
 | 4 — Vite/Vitest | Done | Vite 6.4 + Vitest 4.1 + plugin-react 4.7 + jsdom 29; Node 24 in `.nvmrc`/CI; `vitest/config` in vite.config.js |
 | 5 — MSW 2 | Done | `rest` → `http` + `HttpResponse`; wildcard URL patterns for API host |
-| 6 — ESLint flat config | Not started | |
+| 6 — ESLint flat config | Done | ESLint 9.39 flat config; `@vitest/eslint-plugin` replaces vitest plugins; react-hooks 5.2 |
 | 7 — Framework majors | Not started | |
