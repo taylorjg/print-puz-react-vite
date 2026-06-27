@@ -14,11 +14,9 @@ describe("happy path scenarios", () => {
     cy.findByTestId("puzzle-list").within(() => {
       cy.findByText(/.*\.puz \(.*\)/);
     });
-    cy.findByTestId("puzzle-list").within(() => {
-      cy.findByLabelText("Puzzles")
-        .findByRole("combobox")
-        .trigger("mousedown", { button: 0 });
-    });
+    cy.findByTestId("puzzle-list")
+      .findByRole("combobox", { name: "Puzzles" })
+      .trigger("mousedown", { button: 0 });
     cy.findByRole("listbox").findByText("725.puz (Tue Mar 29 2022)").click();
     cy.findByTestId("puzzle-list").findByText("View Puzzle").click();
     cy.findByText("Eye 725/1570");

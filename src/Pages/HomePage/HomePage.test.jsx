@@ -80,8 +80,9 @@ describe("HomePage happy path scenarios", () => {
 
     const section = screen.getByTestId("puzzle-list");
 
-    const selectComponent = within(section).getByLabelText("Puzzles");
-    await user.click(within(selectComponent).getByRole("combobox"));
+    await user.click(
+      within(section).getByRole("combobox", { name: "Puzzles" })
+    );
     const listbox = await screen.findByRole("listbox");
     await user.click(
       within(listbox).getByText("mock-puzzle-2.puz (Thu Feb 02 2023)")
