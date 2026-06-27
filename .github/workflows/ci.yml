@@ -26,9 +26,10 @@ jobs:
       - uses: cypress-io/github-action@v7
         with:
           install-command: npm clean-install
-          start: npm run dev
-          # The "wait-on" value needs to match "baseUrl" in cypress.config.js.
-          wait-on: "http://localhost:5173/print-puz-react-vite"
+          build: npm run build
+          start: npm run preview
+          # Preview serves dist on 0.0.0.0:5173 (see vite.config.js).
+          wait-on: "http://localhost:5173/print-puz-react-vite/"
           browser: chrome
 
   deploy:
