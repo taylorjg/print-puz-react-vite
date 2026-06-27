@@ -6,11 +6,6 @@ import { RouterTestComponent } from "@app/mocks/RouterTestComponent";
 
 import { PuzzlePage } from "./PuzzlePage";
 
-const routerFuture = {
-  v7_startTransition: true,
-  v7_relativeSplatPath: true,
-};
-
 let user;
 
 beforeEach(() => {
@@ -28,9 +23,8 @@ const myRender = (initialState) => {
       state: initialState,
     },
   ];
-  const opts = { initialEntries, future: routerFuture };
-  const router = createMemoryRouter(routes, opts);
-  return render(<RouterProvider router={router} future={routerFuture} />);
+  const router = createMemoryRouter(routes, { initialEntries });
+  return render(<RouterProvider router={router} />);
 };
 
 const renderPuzzlePage = async (initialState) => {

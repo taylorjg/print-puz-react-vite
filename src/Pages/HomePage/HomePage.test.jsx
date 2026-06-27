@@ -8,11 +8,6 @@ import { server } from "@app/mocks/server";
 
 import { HomePage } from "./HomePage";
 
-const routerFuture = {
-  v7_startTransition: true,
-  v7_relativeSplatPath: true,
-};
-
 let user;
 
 beforeEach(() => {
@@ -27,8 +22,8 @@ const renderPage = async ({
     { path: "/", element: <HomePage /> },
     { path: "/puzzle", element: <RouterTestComponent /> },
   ];
-  const router = createMemoryRouter(routes, { future: routerFuture });
-  const view = render(<RouterProvider router={router} future={routerFuture} />);
+  const router = createMemoryRouter(routes);
+  const view = render(<RouterProvider router={router} />);
   await waitForNetworkCallsToComplete({
     waitForScrapePuzzleUrl,
     waitForListPuzzles,
