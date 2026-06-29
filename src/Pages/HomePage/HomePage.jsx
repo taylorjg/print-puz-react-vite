@@ -46,19 +46,19 @@ export const HomePage = () => {
     }
   };
 
-  const onViewCurrentPuzzleUrl = () => {
+  const onViewCurrentPuzzleUrl = (path = "/puzzle") => {
     const state = { puzzleUrl: currentPuzzle };
-    navigate("/puzzle", { state });
+    navigate(path, { state });
   };
 
-  const onViewPuzzleListSelection = () => {
+  const onViewPuzzleListSelection = (path = "/puzzle") => {
     const state = { puzzleUrl: selectedPuzzle };
-    navigate("/puzzle", { state });
+    navigate(path, { state });
   };
 
-  const onViewExplicitPuzzleUrl = () => {
+  const onViewExplicitPuzzleUrl = (path = "/puzzle") => {
     const state = { puzzleUrl: explicitPuzzle };
-    navigate("/puzzle", { state });
+    navigate(path, { state });
   };
 
   return (
@@ -82,10 +82,16 @@ export const HomePage = () => {
             />
             <StyledControls>
               <Button
-                onClick={onViewCurrentPuzzleUrl}
+                onClick={() => onViewCurrentPuzzleUrl()}
                 disabled={!currentPuzzle}
               >
                 View Puzzle
+              </Button>
+              <Button
+                onClick={() => onViewCurrentPuzzleUrl("/puzzle2")}
+                disabled={!currentPuzzle}
+              >
+                View PDF
               </Button>
               <DataFetchProgress
                 fetchData={scrapePuzzleUrl}
@@ -124,10 +130,16 @@ export const HomePage = () => {
             </Select>
             <StyledControls>
               <Button
-                onClick={onViewPuzzleListSelection}
+                onClick={() => onViewPuzzleListSelection()}
                 disabled={!selectedPuzzle}
               >
                 View Puzzle
+              </Button>
+              <Button
+                onClick={() => onViewPuzzleListSelection("/puzzle2")}
+                disabled={!selectedPuzzle}
+              >
+                View PDF
               </Button>
               <DataFetchProgress
                 fetchData={listPuzzles}
@@ -150,12 +162,20 @@ export const HomePage = () => {
                 setExplicitPuzzle(e.target.value);
               }}
             />
-            <Button
-              onClick={onViewExplicitPuzzleUrl}
-              disabled={!explicitPuzzle}
-            >
-              View Puzzle
-            </Button>
+            <StyledControls>
+              <Button
+                onClick={() => onViewExplicitPuzzleUrl()}
+                disabled={!explicitPuzzle}
+              >
+                View Puzzle
+              </Button>
+              <Button
+                onClick={() => onViewExplicitPuzzleUrl("/puzzle2")}
+                disabled={!explicitPuzzle}
+              >
+                View PDF
+              </Button>
+            </StyledControls>
           </StyledSection>
 
           <Version />
