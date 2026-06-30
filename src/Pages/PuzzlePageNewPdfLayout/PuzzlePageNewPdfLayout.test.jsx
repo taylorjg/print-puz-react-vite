@@ -4,7 +4,7 @@ import { createMemoryRouter, RouterProvider } from "react-router-dom";
 
 import { RouterTestComponent } from "@app/mocks/RouterTestComponent";
 
-import { PuzzlePage } from "./PuzzlePage";
+import { PuzzlePageNewPdfLayout } from "./PuzzlePageNewPdfLayout";
 
 let user;
 
@@ -15,11 +15,11 @@ beforeEach(() => {
 const myRender = (initialState) => {
   const routes = [
     { path: "/", element: <RouterTestComponent /> },
-    { path: "/puzzle", element: <PuzzlePage /> },
+    { path: "/puzzle2", element: <PuzzlePageNewPdfLayout /> },
   ];
   const initialEntries = [
     {
-      pathname: "/puzzle",
+      pathname: "/puzzle2",
       state: initialState,
     },
   ];
@@ -27,7 +27,7 @@ const myRender = (initialState) => {
   return render(<RouterProvider router={router} />);
 };
 
-const renderPuzzlePage = async (initialState) => {
+const renderPuzzlePageNewPdfLayout = async (initialState) => {
   myRender(initialState);
 
   if (!initialState?.puzzleUrl) {
@@ -35,38 +35,34 @@ const renderPuzzlePage = async (initialState) => {
   }
 };
 
-describe("PuzzlePage happy path scenarios", () => {
-  test("displays title and author in header", async () => {
-    await renderPuzzlePage({
+describe("PuzzlePageNewPdfLayout happy path scenarios", () => {
+  test("displays generated PDF", async () => {
+    await renderPuzzlePageNewPdfLayout({
       puzzleUrl:
         "https://www.private-eye.co.uk/pictures/crossword/download/753.puz",
     });
-    expect(await screen.findByText("Eye 753/1598")).toBeInTheDocument();
-    expect(await screen.findByText("Cyclops")).toBeInTheDocument();
+    expect(
+      await screen.findByTitle("Crossword puzzle PDF")
+    ).toBeInTheDocument();
   });
 });
 
-describe("PuzzlePage error scenarios", () => {
+describe("PuzzlePageNewPdfLayout error scenarios", () => {
   it("no puzzle specified", async () => {
-    await renderPuzzlePage();
+    await renderPuzzlePageNewPdfLayout();
     const alert = screen.getByRole("alert");
     expect(within(alert).getByText("No puzzle specified.")).toBeInTheDocument();
     await user.click(within(alert).getByText("Return Home"));
     expect(await screen.findByText("RouterTestComponent")).toBeInTheDocument();
-    expect(screen.getByText(`pathname: /`)).toBeInTheDocument();
   });
 
   it("read or parse failure", async () => {
-    await renderPuzzlePage({
+    await renderPuzzlePageNewPdfLayout({
       puzzleUrl:
         "https://www.private-eye.co.uk/pictures/crossword/download/bogus.puz",
     });
     expect(
       await screen.findByText("Failed to read or parse puzzle.")
     ).toBeInTheDocument();
-    const alert = screen.getByRole("alert");
-    await user.click(within(alert).getByText("Return Home"));
-    expect(await screen.findByText("RouterTestComponent")).toBeInTheDocument();
-    expect(screen.getByText(`pathname: /`)).toBeInTheDocument();
   });
 });

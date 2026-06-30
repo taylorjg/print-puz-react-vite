@@ -11,7 +11,7 @@ import {
   StyledClueNumber,
   StyledClueType,
   StyledTable,
-} from "./PuzzlePage.styles";
+} from "./PuzzlePageOldHtmlLayout.styles";
 
 const findClueNumber = (parsedPuzzle, row, col) => {
   const matchingAcrossClue = parsedPuzzle.acrossClues.find(
@@ -60,7 +60,7 @@ const makeGridSquares = (parsedPuzzle) => {
   return gridSquares;
 };
 
-export const PuzzlePage = () => {
+export const PuzzlePageOldHtmlLayout = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
 

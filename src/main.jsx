@@ -6,7 +6,11 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
-import { HomePage, PuzzlePage, PuzzlePage2 } from "@app/Pages";
+import {
+  HomePage,
+  PuzzlePageOldHtmlLayout,
+  PuzzlePageNewPdfLayout,
+} from "@app/Pages";
 
 const router = createHashRouter([
   {
@@ -15,11 +19,11 @@ const router = createHashRouter([
   },
   {
     path: "/puzzle",
-    element: <PuzzlePage />,
+    element: <PuzzlePageOldHtmlLayout />,
   },
   {
     path: "/puzzle2",
-    element: <PuzzlePage2 />,
+    element: <PuzzlePageNewPdfLayout />,
   },
 ]);
 

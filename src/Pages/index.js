@@ -1,3 +1,3 @@
 export * from "./HomePage";
-export * from "./PuzzlePage";
-export * from "./PuzzlePage2";
+export * from "./PuzzlePageOldHtmlLayout";
+export * from "./PuzzlePageNewPdfLayout";

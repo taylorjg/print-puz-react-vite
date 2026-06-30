@@ -4,11 +4,17 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { parsePuzzle, extractErrorMessage } from "@app/serverless";
 
-import { LoadingAlert, ErrorAlert } from "../PuzzlePage/components";
+import {
+  LoadingAlert,
+  ErrorAlert,
+} from "../PuzzlePageOldHtmlLayout/components";
 import { generateCrosswordPdf } from "./generateCrosswordPdf";
-import { StyledPdfFrame, StyledPdfViewer } from "./PuzzlePage2.styles";
+import {
+  StyledPdfFrame,
+  StyledPdfViewer,
+} from "./PuzzlePageNewPdfLayout.styles";
 
-export const PuzzlePage2 = () => {
+export const PuzzlePageNewPdfLayout = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
 
