@@ -63,7 +63,7 @@ export default [
   },
   cypress.configs.recommended,
   {
-    files: ["**/*.{test,spec}.{js,jsx}", "src/setupFiles.js"],
+    files: ["**/*.{test,spec}.{js,jsx}", "src/setup-files.js"],
     ...vitest.configs.recommended,
     languageOptions: {
       globals: {

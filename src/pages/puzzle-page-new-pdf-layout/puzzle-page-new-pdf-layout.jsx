@@ -7,12 +7,12 @@ import { parsePuzzle, extractErrorMessage } from "@app/serverless";
 import {
   LoadingAlert,
   ErrorAlert,
-} from "../PuzzlePageOldHtmlLayout/components";
-import { generateCrosswordPdf } from "./generateCrosswordPdf";
+} from "../puzzle-page-old-html-layout/components";
+import { generateCrosswordPdf } from "./generate-crossword-pdf";
 import {
   StyledPdfFrame,
   StyledPdfViewer,
-} from "./PuzzlePageNewPdfLayout.styles";
+} from "./puzzle-page-new-pdf-layout.styles";
 
 export const PuzzlePageNewPdfLayout = () => {
   const { state } = useLocation();

@@ -13,17 +13,17 @@ import {
 } from "@mui/material";
 
 import { listPuzzles, scrapePuzzleUrl } from "@app/serverless";
-import { Version } from "@app/Version";
+import { Version } from "@app/version";
 
 import { DataFetchProgress } from "./components";
-import { homePageTheme } from "./HomePage.theme";
+import { homePageTheme } from "./homepage.theme";
 
 import {
   StyledControls,
   StyledPageWrapper,
   StyledSection,
   StyledSections,
-} from "./HomePage.styles";
+} from "./homepage.styles";
 
 export const HomePage = () => {
   const [currentPuzzle, setCurrentPuzzleUrl] = useState("");

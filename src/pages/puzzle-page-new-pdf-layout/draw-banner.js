@@ -1,7 +1,7 @@
 import { rgb } from "pdf-lib";
 
-import { BANNER } from "./bannerLayout";
-import { PDF_PAGE } from "./pdfLayout";
+import { BANNER } from "./banner-layout";
+import { PDF_PAGE } from "./pdf-layout";
 
 const BLACK = rgb(0, 0, 0);
 const WHITE = rgb(1, 1, 1);

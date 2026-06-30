@@ -10,7 +10,7 @@ import {
   HomePage,
   PuzzlePageOldHtmlLayout,
   PuzzlePageNewPdfLayout,
-} from "@app/Pages";
+} from "@app/pages";
 
 const router = createHashRouter([
   {

@@ -2,9 +2,9 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 
-import { RouterTestComponent } from "@app/mocks/RouterTestComponent";
+import { RouterTestComponent } from "@app/mocks/router-test-component";
 
-import { PuzzlePageOldHtmlLayout } from "./PuzzlePageOldHtmlLayout";
+import { PuzzlePageOldHtmlLayout } from "./puzzle-page-old-html-layout";
 
 let user;
 

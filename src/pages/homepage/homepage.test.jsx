@@ -3,11 +3,11 @@ import userEvent from "@testing-library/user-event";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import { http, HttpResponse } from "msw";
 
-import { RouterTestComponent } from "@app/mocks/RouterTestComponent";
+import { RouterTestComponent } from "@app/mocks/router-test-component";
 import { server } from "@app/mocks/server";
-import { renderWithTheme } from "@app/testUtils";
+import { renderWithTheme } from "@app/test-utils";
 
-import { HomePage } from "./HomePage";
+import { HomePage } from "@app/pages/homepage";
 
 let user;
 

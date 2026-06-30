@@ -1,7 +1,7 @@
 import puzzle753 from "@app/mocks/puzzle753.json";
 
-import { generateCrosswordPdf } from "./generateCrosswordPdf";
-import { cluesStartY } from "./pdfLayout";
+import { generateCrosswordPdf } from "./generate-crossword-pdf";
+import { cluesStartY } from "./pdf-layout";
 
 describe("generateCrosswordPdf", () => {
   test("returns a valid PDF document", async () => {

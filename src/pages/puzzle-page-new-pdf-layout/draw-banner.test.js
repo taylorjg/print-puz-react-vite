@@ -2,10 +2,10 @@ import { PDFDocument, StandardFonts } from "pdf-lib";
 
 import puzzle753 from "@app/mocks/puzzle753.json";
 
-import { BANNER } from "./bannerLayout";
-import { drawBanner } from "./drawBanner";
-import { PDF_PAGE } from "./pdfLayout";
-import { generateCrosswordPdf } from "./generateCrosswordPdf";
+import { BANNER } from "./banner-layout";
+import { drawBanner } from "./draw-banner";
+import { PDF_PAGE } from "./pdf-layout";
+import { generateCrosswordPdf } from "./generate-crossword-pdf";
 
 const pdfHeader = (bytes) => new TextDecoder().decode(bytes.slice(0, 5));
 

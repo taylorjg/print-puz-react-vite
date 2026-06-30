@@ -2,9 +2,9 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 
-import { RouterTestComponent } from "@app/mocks/RouterTestComponent";
+import { RouterTestComponent } from "@app/mocks/router-test-component";
 
-import { PuzzlePageNewPdfLayout } from "./PuzzlePageNewPdfLayout";
+import { PuzzlePageNewPdfLayout } from "./puzzle-page-new-pdf-layout";
 
 let user;
 

@@ -8,8 +8,8 @@ import {
   cluesStartY,
   findClueNumber,
   formatNumberLabel,
-} from "./pdfLayout";
-import { drawBanner } from "./drawBanner";
+} from "./pdf-layout";
+import { drawBanner } from "./draw-banner";
 
 const BLACK = rgb(0, 0, 0);
 const WHITE = rgb(1, 1, 1);
