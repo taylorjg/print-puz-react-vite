@@ -3,9 +3,12 @@ import { useNavigate } from "react-router-dom";
 import {
   Button,
   Container,
+  CssBaseline,
+  Link,
   MenuItem,
   Select,
   TextField,
+  ThemeProvider,
   Typography,
 } from "@mui/material";
 
@@ -13,6 +16,7 @@ import { listPuzzles, scrapePuzzleUrl } from "@app/serverless";
 import { Version } from "@app/Version";
 
 import { DataFetchProgress } from "./components";
+import { homePageTheme } from "./HomePage.theme";
 
 import {
   StyledControls,
@@ -62,125 +66,136 @@ export const HomePage = () => {
   };
 
   return (
-    <StyledPageWrapper>
-      <Container maxWidth="sm">
-        <StyledSections>
-          <StyledSection data-testid="current-puzzle">
-            <Typography>
-              Use the following link scraped from the current&nbsp;
-              <a href="https://www.private-eye.co.uk/crossword">
-                crossword puzzle page
-              </a>
-              &nbsp;of the Private Eye website.
-            </Typography>
-            <TextField
-              fullWidth
-              size="small"
-              type="text"
-              value={currentPuzzle}
-              readOnly
-            />
-            <StyledControls>
-              <Button
-                onClick={() => onViewCurrentPuzzleUrl()}
-                disabled={!currentPuzzle}
-              >
-                View Puzzle
-              </Button>
-              <Button
-                onClick={() => onViewCurrentPuzzleUrl("/puzzle2")}
-                disabled={!currentPuzzle}
-              >
-                View PDF
-              </Button>
-              <DataFetchProgress
-                fetchData={scrapePuzzleUrl}
-                onSuccess={onScrapePuzzleUrlSuccess}
+    <ThemeProvider theme={homePageTheme}>
+      <CssBaseline />
+      <StyledPageWrapper>
+        <Container maxWidth="sm">
+          <StyledSections>
+            <StyledSection data-testid="current-puzzle">
+              <Typography>
+                Use the following link scraped from the current&nbsp;
+                <Link
+                  href="https://www.private-eye.co.uk/crossword"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  crossword puzzle page
+                </Link>
+                &nbsp;of the Private Eye website.
+              </Typography>
+              <TextField
+                fullWidth
+                size="small"
+                type="text"
+                value={currentPuzzle}
+                readOnly
               />
-            </StyledControls>
-          </StyledSection>
+              <StyledControls>
+                <Button
+                  onClick={() => onViewCurrentPuzzleUrl()}
+                  disabled={!currentPuzzle}
+                >
+                  View Puzzle
+                </Button>
+                <Button
+                  onClick={() => onViewCurrentPuzzleUrl("/puzzle2")}
+                  disabled={!currentPuzzle}
+                >
+                  View PDF
+                </Button>
+                <DataFetchProgress
+                  fetchData={scrapePuzzleUrl}
+                  onSuccess={onScrapePuzzleUrlSuccess}
+                />
+              </StyledControls>
+            </StyledSection>
 
-          <StyledSection data-testid="puzzle-list">
-            <Typography>
-              Select a puzzle from a list scraped from the&nbsp;
-              <a href="https://www.private-eye.co.uk/pictures/crossword/download/">
-                download page
-              </a>
-              &nbsp;of the Private Eye website.
-            </Typography>
-            <Select
-              fullWidth
-              size="small"
-              aria-label="Puzzles"
-              value={selectedPuzzle}
-              onChange={(e) => {
-                setSelectedPuzzle(e.target.value);
-              }}
-            >
-              {puzzles.map((puzzle) => {
-                const { url, timestamp } = puzzle;
-                const pos = url.lastIndexOf("/");
-                const name = url.substring(pos + 1);
-                return (
-                  <MenuItem key={url} value={url}>
-                    {name} ({new Date(timestamp).toDateString()})
-                  </MenuItem>
-                );
-              })}
-            </Select>
-            <StyledControls>
-              <Button
-                onClick={() => onViewPuzzleListSelection()}
-                disabled={!selectedPuzzle}
+            <StyledSection data-testid="puzzle-list">
+              <Typography>
+                Select a puzzle from a list scraped from the&nbsp;
+                <Link
+                  href="https://www.private-eye.co.uk/pictures/crossword/download/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  download page
+                </Link>
+                &nbsp;of the Private Eye website.
+              </Typography>
+              <Select
+                fullWidth
+                size="small"
+                aria-label="Puzzles"
+                value={selectedPuzzle}
+                onChange={(e) => {
+                  setSelectedPuzzle(e.target.value);
+                }}
               >
-                View Puzzle
-              </Button>
-              <Button
-                onClick={() => onViewPuzzleListSelection("/puzzle2")}
-                disabled={!selectedPuzzle}
-              >
-                View PDF
-              </Button>
-              <DataFetchProgress
-                fetchData={listPuzzles}
-                onSuccess={onListPuzzlesSuccess}
+                {puzzles.map((puzzle) => {
+                  const { url, timestamp } = puzzle;
+                  const pos = url.lastIndexOf("/");
+                  const name = url.substring(pos + 1);
+                  return (
+                    <MenuItem key={url} value={url}>
+                      {name} ({new Date(timestamp).toDateString()})
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+              <StyledControls>
+                <Button
+                  onClick={() => onViewPuzzleListSelection()}
+                  disabled={!selectedPuzzle}
+                >
+                  View Puzzle
+                </Button>
+                <Button
+                  onClick={() => onViewPuzzleListSelection("/puzzle2")}
+                  disabled={!selectedPuzzle}
+                >
+                  View PDF
+                </Button>
+                <DataFetchProgress
+                  fetchData={listPuzzles}
+                  onSuccess={onListPuzzlesSuccess}
+                />
+              </StyledControls>
+            </StyledSection>
+
+            <StyledSection data-testid="explicit-puzzle-url">
+              <Typography>
+                Enter an arbitrary link to a .puz binary file.
+              </Typography>
+              <TextField
+                fullWidth
+                size="small"
+                label="Puzzle Url"
+                type="text"
+                value={explicitPuzzle}
+                onChange={(e) => {
+                  setExplicitPuzzle(e.target.value);
+                }}
               />
-            </StyledControls>
-          </StyledSection>
+              <StyledControls>
+                <Button
+                  onClick={() => onViewExplicitPuzzleUrl()}
+                  disabled={!explicitPuzzle}
+                >
+                  View Puzzle
+                </Button>
+                <Button
+                  onClick={() => onViewExplicitPuzzleUrl("/puzzle2")}
+                  disabled={!explicitPuzzle}
+                >
+                  View PDF
+                </Button>
+              </StyledControls>
+            </StyledSection>
 
-          <StyledSection data-testid="explicit-puzzle-url">
-            <Typography>
-              Enter an arbitrary link to a .puz binary file.
-            </Typography>
-            <TextField
-              fullWidth
-              size="small"
-              label="Puzzle Url"
-              type="text"
-              value={explicitPuzzle}
-              onChange={(e) => {
-                setExplicitPuzzle(e.target.value);
-              }}
-            />
-            <StyledControls>
-              <Button
-                onClick={() => onViewExplicitPuzzleUrl()}
-                disabled={!explicitPuzzle}
-              >
-                View Puzzle
-              </Button>
-              <Button
-                onClick={() => onViewExplicitPuzzleUrl("/puzzle2")}
-                disabled={!explicitPuzzle}
-              >
-                View PDF
-              </Button>
-            </StyledControls>
-          </StyledSection>
-
-          <Version />
-        </StyledSections>
-      </Container>
-    </StyledPageWrapper>
+            <Version />
+          </StyledSections>
+        </Container>
+      </StyledPageWrapper>
+    </ThemeProvider>
   );
 };

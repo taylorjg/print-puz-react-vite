@@ -10,6 +10,8 @@ export const StyledPageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${({ theme }) => theme.palette.background.default};
+  color: ${({ theme }) => theme.palette.text.primary};
 `;
 
 export const StyledDiv = styled.div`
@@ -27,8 +29,8 @@ export const StyledSection = styled(Box)`
   flex-direction: column;
   gap: 1rem;
   align-items: flex-start;
-  border: 1px solid black;
-  border-radius: 0.25rem;
+  border: 1px solid ${({ theme }) => theme.palette.divider};
+  border-radius: ${({ theme }) => theme.shape.borderRadius}px;
   padding: 0.5rem;
 `;
 

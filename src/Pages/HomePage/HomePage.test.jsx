@@ -1,10 +1,11 @@
-import { render, screen, waitFor, within } from "@testing-library/react";
+import { screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import { http, HttpResponse } from "msw";
 
 import { RouterTestComponent } from "@app/mocks/RouterTestComponent";
 import { server } from "@app/mocks/server";
+import { renderWithTheme } from "@app/testUtils";
 
 import { HomePage } from "./HomePage";
 
@@ -23,7 +24,7 @@ const renderPage = async ({
     { path: "/puzzle", element: <RouterTestComponent /> },
   ];
   const router = createMemoryRouter(routes);
-  const view = render(<RouterProvider router={router} />);
+  const view = renderWithTheme(<RouterProvider router={router} />);
   await waitForNetworkCallsToComplete({
     waitForScrapePuzzleUrl,
     waitForListPuzzles,

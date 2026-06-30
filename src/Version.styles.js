@@ -6,4 +6,5 @@ export const StyledVersion = styled.span`
   position: fixed;
   right: 0.5rem;
   bottom: 0.5rem;
+  color: ${({ theme }) => theme?.palette?.text?.secondary ?? "inherit"};
 `;
