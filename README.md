@@ -19,7 +19,7 @@ In particular, we do this for the Private Eye crossword so that it is easier to 
 - Vite
 - Vitest + React Testing Library + MSW
 - Cypress + Cypress Testing Library
-- GitHub Actions Workflows
+- GitHub Actions workflows
 - Serverless Backend (see separate [repo](https://github.com/taylorjg/print-puz-serverless))
 
 # Screenshots
