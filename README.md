@@ -5,7 +5,7 @@
 Take a binary .puz file and render it in the style of The Daily Telegraph cryptic crossword. We support two different styles:
 
 * The older HTML layout
-* The newer PDF Layout
+* The newer PDF Layout (since November 2018 or so)
 
 In particular, we do this for the Private Eye crossword so that it is easier to print than their
 [crossword page](https://www.private-eye.co.uk/crossword).
