@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 
 import { listPuzzles, scrapePuzzleUrl } from "@app/serverless";
-import { Version } from "@app/version";
+import { Version } from "@app/components";
 
 import { DataFetchProgress } from "./components";
 import { homePageTheme } from "./homepage.theme";

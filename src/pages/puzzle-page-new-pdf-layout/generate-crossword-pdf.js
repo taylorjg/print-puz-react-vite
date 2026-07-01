@@ -227,13 +227,7 @@ export const generateCrosswordPdf = async (parsedPuzzle) => {
     clueY,
     font
   );
-  drawClueColumn(
-    ensurePage,
-    parsedPuzzle.downClues ?? [],
-    "down",
-    clueY,
-    font
-  );
+  drawClueColumn(ensurePage, parsedPuzzle.downClues ?? [], "down", clueY, font);
 
   return pdfDoc.save();
 };

@@ -4,10 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { parsePuzzle, extractErrorMessage } from "@app/serverless";
 
-import {
-  LoadingAlert,
-  ErrorAlert,
-} from "../puzzle-page-old-html-layout/components";
+import { LoadingAlert, ErrorAlert } from "@app/components";
 import { generateCrosswordPdf } from "./generate-crossword-pdf";
 import {
   StyledPdfFrame,
