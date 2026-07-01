@@ -6,7 +6,7 @@ jobs:
     name: Run Unit Tests (Vitest)
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
@@ -24,7 +24,7 @@ jobs:
       image: cypress/browsers:24.17.0
       options: --user 1001
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: cypress-io/github-action@v7
         with:
           install-command: npm clean-install
@@ -42,7 +42,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
