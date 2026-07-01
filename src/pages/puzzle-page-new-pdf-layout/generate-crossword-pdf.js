@@ -46,8 +46,8 @@ const wrapText = (text, font, fontSize, maxWidth) => {
   return lines.length > 0 ? lines : [""];
 };
 
-const drawMasthead = (page, fontBold, numberLabel) => {
-  drawBanner(page, fontBold, numberLabel);
+const drawMasthead = (page, font, numberLabel) => {
+  drawBanner(page, font, numberLabel);
 };
 
 const drawGrid = (page, parsedPuzzle, font) => {
@@ -118,14 +118,7 @@ const drawGrid = (page, parsedPuzzle, font) => {
 const clueEntryHeight = (clue, font, textSize, maxWidth) =>
   wrapText(clue, font, textSize, maxWidth).length * PDF_LAYOUT.clues.lineHeight;
 
-const drawClueEntry = (
-  page,
-  { clueNumber, clue },
-  y,
-  config,
-  font,
-  fontBold
-) => {
+const drawClueEntry = (page, { clueNumber, clue }, y, config, font) => {
   const { textSize, lineHeight } = PDF_LAYOUT.clues;
   const lines = wrapText(clue, font, textSize, config.maxWidth);
 
@@ -133,7 +126,7 @@ const drawClueEntry = (
     x: config.numberX,
     y: baselineFromTop(y, textSize),
     size: textSize,
-    font: fontBold,
+    font,
     color: BLACK,
   });
 
@@ -150,7 +143,7 @@ const drawClueEntry = (
   return lines.length * lineHeight;
 };
 
-const drawClueColumn = (ensurePage, clues, column, startY, font, fontBold) => {
+const drawClueColumn = (ensurePage, clues, column, startY, font) => {
   const {
     headerSize,
     headerGap,
@@ -172,7 +165,7 @@ const drawClueColumn = (ensurePage, clues, column, startY, font, fontBold) => {
     x: config.numberX,
     y: baselineFromTop(y, headerSize),
     size: headerSize,
-    font: fontBold,
+    font,
     color: BLACK,
   });
   y += headerSize + headerGap;
@@ -191,7 +184,7 @@ const drawClueColumn = (ensurePage, clues, column, startY, font, fontBold) => {
       y = continuationY;
     }
 
-    y += drawClueEntry(page, entry, y, config, font, fontBold);
+    y += drawClueEntry(page, entry, y, config, font);
   }
 };
 
@@ -206,14 +199,13 @@ export const generateCrosswordPdf = async (parsedPuzzle) => {
   };
 
   const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-  const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
 
   const { title, author, height } = parsedPuzzle.puzzle;
   const numberLabel = formatNumberLabel(title);
   const dateText = sanitizeText(author ? `${title} · ${author}` : title);
   const firstPage = pages[0];
 
-  drawMasthead(firstPage, fontBold, numberLabel);
+  drawMasthead(firstPage, font, numberLabel);
 
   const dateWidth = font.widthOfTextAtSize(dateText, PDF_LAYOUT.date.size);
   firstPage.drawText(dateText, {
@@ -233,16 +225,14 @@ export const generateCrosswordPdf = async (parsedPuzzle) => {
     parsedPuzzle.acrossClues ?? [],
     "across",
     clueY,
-    font,
-    fontBold
+    font
   );
   drawClueColumn(
     ensurePage,
     parsedPuzzle.downClues ?? [],
     "down",
     clueY,
-    font,
-    fontBold
+    font
   );
 
   return pdfDoc.save();

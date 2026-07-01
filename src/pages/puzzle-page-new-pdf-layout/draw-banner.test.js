@@ -13,9 +13,9 @@ describe("drawBanner", () => {
   test("produces a valid PDF page", async () => {
     const pdfDoc = await PDFDocument.create();
     const page = pdfDoc.addPage([PDF_PAGE.width, PDF_PAGE.height]);
-    const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
-    drawBanner(page, fontBold, "NO. 31,258");
+    drawBanner(page, font, "NO. 31,258");
 
     const bytes = await pdfDoc.save();
     expect(pdfHeader(bytes)).toBe("%PDF-");

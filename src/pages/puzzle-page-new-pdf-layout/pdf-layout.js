@@ -10,7 +10,7 @@ export const PDF_LAYOUT = {
   grid: {
     y: 63,
     cellSize: 24,
-    numberSize: 5.6,
+    numberSize: 5.63,
     numberOffsetX: 0.75,
     numberOffsetY: 0.75,
     // Telegraph PDF vector strokes: inner lines 0.75 pt (drawing #531); uniform per preview.

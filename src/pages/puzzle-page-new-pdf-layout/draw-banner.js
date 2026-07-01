@@ -12,7 +12,7 @@ const yFromTop = (yTop) => PDF_PAGE.height - yTop;
  * Telegraph-style cryptic crossword banner: hangers, notched bar, white label.
  * Coordinates match the reference PDF (top-left origin converted to PDF y-up).
  */
-export const drawBanner = (page, fontBold, numberLabel) => {
+export const drawBanner = (page, font, numberLabel) => {
   const { body, hangers, notches, text } = BANNER;
   const label = `CRYPTIC CROSSWORD ${numberLabel}`;
 
@@ -44,12 +44,12 @@ export const drawBanner = (page, fontBold, numberLabel) => {
     });
   }
 
-  const textWidth = fontBold.widthOfTextAtSize(label, text.size);
+  const textWidth = font.widthOfTextAtSize(label, text.size);
   page.drawText(label, {
     x: body.x + (body.width - textWidth) / 2,
     y: yFromTop(text.baselineFromTop),
     size: text.size,
-    font: fontBold,
+    font,
     color: WHITE,
   });
 };
