@@ -42,7 +42,7 @@ describe("PuzzlePageNewPdfLayout happy path scenarios", () => {
         "https://www.private-eye.co.uk/pictures/crossword/download/753.puz",
     });
     expect(
-      await screen.findByTitle("Crossword puzzle PDF")
+      await screen.findByTitle("Crossword puzzle")
     ).toBeInTheDocument();
   });
 });

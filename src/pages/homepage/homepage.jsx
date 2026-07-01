@@ -50,19 +50,16 @@ export const HomePage = () => {
     }
   };
 
-  const onViewCurrentPuzzleUrl = (path = "/puzzle") => {
-    const state = { puzzleUrl: currentPuzzle };
-    navigate(path, { state });
+  const onViewCurrentPuzzleUrl = () => {
+    navigate("/puzzle2", { state: { puzzleUrl: currentPuzzle } });
   };
 
-  const onViewPuzzleListSelection = (path = "/puzzle") => {
-    const state = { puzzleUrl: selectedPuzzle };
-    navigate(path, { state });
+  const onViewPuzzleListSelection = () => {
+    navigate("/puzzle2", { state: { puzzleUrl: selectedPuzzle } });
   };
 
-  const onViewExplicitPuzzleUrl = (path = "/puzzle") => {
-    const state = { puzzleUrl: explicitPuzzle };
-    navigate(path, { state });
+  const onViewExplicitPuzzleUrl = () => {
+    navigate("/puzzle2", { state: { puzzleUrl: explicitPuzzle } });
   };
 
   return (
@@ -96,12 +93,6 @@ export const HomePage = () => {
                   disabled={!currentPuzzle}
                 >
                   View Puzzle
-                </Button>
-                <Button
-                  onClick={() => onViewCurrentPuzzleUrl("/puzzle2")}
-                  disabled={!currentPuzzle}
-                >
-                  View PDF
                 </Button>
                 <DataFetchProgress
                   fetchData={scrapePuzzleUrl}
@@ -149,12 +140,6 @@ export const HomePage = () => {
                 >
                   View Puzzle
                 </Button>
-                <Button
-                  onClick={() => onViewPuzzleListSelection("/puzzle2")}
-                  disabled={!selectedPuzzle}
-                >
-                  View PDF
-                </Button>
                 <DataFetchProgress
                   fetchData={listPuzzles}
                   onSuccess={onListPuzzlesSuccess}
@@ -182,12 +167,6 @@ export const HomePage = () => {
                   disabled={!explicitPuzzle}
                 >
                   View Puzzle
-                </Button>
-                <Button
-                  onClick={() => onViewExplicitPuzzleUrl("/puzzle2")}
-                  disabled={!explicitPuzzle}
-                >
-                  View PDF
                 </Button>
               </StyledControls>
             </StyledSection>

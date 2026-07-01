@@ -36,7 +36,7 @@ export const StyledSection = styled(Box)`
 
 export const StyledControls = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 1rem;
   width: 100%;
 `;

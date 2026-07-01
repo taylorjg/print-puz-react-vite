@@ -5,8 +5,7 @@ describe("happy path scenarios", () => {
       cy.findByDisplayValue(/.puz$/);
       cy.findByText("View Puzzle").click();
     });
-    cy.findByText(/^Eye \d+\/\d+/);
-    cy.findByText("Cyclops");
+    cy.findByTitle("Crossword puzzle");
   });
 
   it("select a puzzle url from the list", () => {
@@ -19,8 +18,7 @@ describe("happy path scenarios", () => {
       .trigger("mousedown", { button: 0 });
     cy.findByRole("listbox").findByText("725.puz (Tue Mar 29 2022)").click();
     cy.findByTestId("puzzle-list").findByText("View Puzzle").click();
-    cy.findByText("Eye 725/1570");
-    cy.findByText("Cyclops");
+    cy.findByTitle("Crossword puzzle");
   });
 
   it("enter an explicit puzzle url", () => {
@@ -31,14 +29,13 @@ describe("happy path scenarios", () => {
       );
       cy.findByText("View Puzzle").click();
     });
-    cy.findByText("Eye 753/1598");
-    cy.findByText("Cyclops");
+    cy.findByTitle("Crossword puzzle");
   });
 });
 
 describe("error scenarios", () => {
   it("no puzzle specified", () => {
-    cy.visit("/#/puzzle");
+    cy.visit("/#/puzzle2");
     cy.findByRole("alert").within(() => {
       cy.findByText("No puzzle specified.");
       cy.findByText("Return Home").click();
@@ -56,7 +53,7 @@ describe("error scenarios", () => {
       cy.findByText("View Puzzle").click();
     });
     cy.location("pathname").should("eq", "/print-puz-react-vite/");
-    cy.location("hash").should("eq", "#/puzzle");
+    cy.location("hash").should("eq", "#/puzzle2");
     cy.findByRole("alert").within(() => {
       cy.findByText("Failed to read or parse puzzle.");
       cy.findByText("Return Home").click();

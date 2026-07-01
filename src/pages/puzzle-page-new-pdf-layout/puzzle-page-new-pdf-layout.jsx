@@ -89,7 +89,7 @@ export const PuzzlePageNewPdfLayout = () => {
       <StyledPdfViewer>
         <StyledPdfFrame
           src={`${pdfUrl}#view=Fit`}
-          title="Crossword puzzle PDF"
+          title="Crossword puzzle"
         />
       </StyledPdfViewer>
     </>
