@@ -53,7 +53,10 @@ describe("error scenarios", () => {
       cy.findByText("View Puzzle").click();
     });
     cy.location("pathname").should("eq", "/print-puz-react-vite/");
-    cy.location("hash").should("eq", "#/puzzle2");
+    cy.location("hash").should(
+      "eq",
+      "#/puzzle2?private-eye-crossword=bogus.puz"
+    );
     cy.findByRole("alert").within(() => {
       cy.findByText("Failed to read or parse puzzle.");
       cy.findByText("Return Home").click();

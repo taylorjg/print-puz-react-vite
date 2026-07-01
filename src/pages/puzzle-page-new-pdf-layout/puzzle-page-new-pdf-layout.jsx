@@ -3,6 +3,7 @@ import { Global } from "@emotion/react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { parsePuzzle, extractErrorMessage } from "@app/serverless";
+import { puzzleUrlFromSearch } from "@app/helpers";
 
 import { LoadingAlert, ErrorAlert } from "@app/components";
 import { generateCrosswordPdf } from "./generate-crossword-pdf";
@@ -12,8 +13,9 @@ import {
 } from "./puzzle-page-new-pdf-layout.styles";
 
 export const PuzzlePageNewPdfLayout = () => {
-  const { state } = useLocation();
+  const { search } = useLocation();
   const navigate = useNavigate();
+  const puzzleUrl = puzzleUrlFromSearch(search);
 
   const [errorMessage, setErrorMessage] = useState();
   const [pdfUrl, setPdfUrl] = useState();
@@ -26,9 +28,9 @@ export const PuzzlePageNewPdfLayout = () => {
     mountedRef.current = true;
 
     const loadPdf = async () => {
-      if (!state?.puzzleUrl) return;
+      if (!puzzleUrl) return;
       try {
-        const parsedPuzzle = await parsePuzzle(state.puzzleUrl);
+        const parsedPuzzle = await parsePuzzle(puzzleUrl);
         const pdfBytes = await generateCrosswordPdf(parsedPuzzle);
         const blob = new Blob([pdfBytes], { type: "application/pdf" });
         const url = URL.createObjectURL(blob);
@@ -48,13 +50,13 @@ export const PuzzlePageNewPdfLayout = () => {
         URL.revokeObjectURL(pdfUrlRef.current);
       }
     };
-  }, [state]);
+  }, [puzzleUrl]);
 
   const onReturnHome = () => {
     navigate("/");
   };
 
-  if (!state?.puzzleUrl) {
+  if (!puzzleUrl) {
     return (
       <ErrorAlert message="No puzzle specified." onReturnHome={onReturnHome} />
     );
@@ -87,10 +89,7 @@ export const PuzzlePageNewPdfLayout = () => {
         }}
       />
       <StyledPdfViewer>
-        <StyledPdfFrame
-          src={`${pdfUrl}#view=Fit`}
-          title="Crossword puzzle"
-        />
+        <StyledPdfFrame src={`${pdfUrl}#view=Fit`} title="Crossword puzzle" />
       </StyledPdfViewer>
     </>
   );

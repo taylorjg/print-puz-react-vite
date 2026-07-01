@@ -14,6 +14,7 @@ import {
 
 import { listPuzzles, scrapePuzzleUrl } from "@app/serverless";
 import { Version } from "@app/components";
+import { buildPuzzlePath } from "@app/helpers";
 
 import { DataFetchProgress } from "./components";
 import { homePageTheme } from "./homepage.theme";
@@ -51,15 +52,15 @@ export const HomePage = () => {
   };
 
   const onViewCurrentPuzzleUrl = () => {
-    navigate("/puzzle2", { state: { puzzleUrl: currentPuzzle } });
+    navigate(buildPuzzlePath(currentPuzzle));
   };
 
   const onViewPuzzleListSelection = () => {
-    navigate("/puzzle2", { state: { puzzleUrl: selectedPuzzle } });
+    navigate(buildPuzzlePath(selectedPuzzle));
   };
 
   const onViewExplicitPuzzleUrl = () => {
-    navigate("/puzzle2", { state: { puzzleUrl: explicitPuzzle } });
+    navigate(buildPuzzlePath(explicitPuzzle));
   };
 
   return (

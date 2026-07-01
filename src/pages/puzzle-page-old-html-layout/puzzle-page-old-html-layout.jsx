@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { parsePuzzle, extractErrorMessage } from "@app/serverless";
+import { puzzleUrlFromSearch } from "@app/helpers";
 import { LoadingAlert, ErrorAlert, Version } from "@app/components";
 import * as U from "@app/utils";
 
@@ -14,8 +15,9 @@ import {
 import { makeGridSquares } from "./puzzle-page-old-html-layout.utils";
 
 export const PuzzlePageOldHtmlLayout = () => {
-  const { state } = useLocation();
+  const { search } = useLocation();
   const navigate = useNavigate();
+  const puzzleUrl = puzzleUrlFromSearch(search);
 
   const [errorMessage, setErrorMessage] = useState();
   const [parsedPuzzle, setParsedPuzzle] = useState();
@@ -26,9 +28,9 @@ export const PuzzlePageOldHtmlLayout = () => {
     if (mountedRef.current) return;
     mountedRef.current = true;
     const parsePuzzleAsync = async () => {
-      if (state?.puzzleUrl) {
+      if (puzzleUrl) {
         try {
-          const result = await parsePuzzle(state.puzzleUrl);
+          const result = await parsePuzzle(puzzleUrl);
           setParsedPuzzle(result);
         } catch (error) {
           setErrorMessage(extractErrorMessage(error));
@@ -38,13 +40,13 @@ export const PuzzlePageOldHtmlLayout = () => {
       }
     };
     parsePuzzleAsync();
-  }, [state]);
+  }, [puzzleUrl]);
 
   const onReturnHome = () => {
     navigate("/");
   };
 
-  if (!state?.puzzleUrl) {
+  if (!puzzleUrl) {
     return (
       <ErrorAlert message="No puzzle specified." onReturnHome={onReturnHome} />
     );

@@ -1,13 +1,13 @@
 import { useLocation } from "react-router-dom";
 
 export const RouterTestComponent = () => {
-  const { pathname, state } = useLocation();
+  const { pathname, search } = useLocation();
 
   return (
     <>
       <div>RouterTestComponent</div>
       <div>pathname: {pathname}</div>
-      <div>state: {JSON.stringify(state)}</div>
+      <div>search: {search}</div>
     </>
   );
 };

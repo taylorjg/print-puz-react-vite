@@ -5,6 +5,7 @@ import { http, HttpResponse } from "msw";
 
 import { RouterTestComponent } from "@app/mocks/router-test-component";
 import { server } from "@app/mocks/server";
+import { buildPuzzleSearch } from "@app/helpers";
 import { renderWithTheme } from "@app/test-utils";
 
 import { HomePage } from "@app/pages/homepage";
@@ -56,11 +57,11 @@ const checkPageNavigation = async (section, puzzleUrl) => {
   await user.click(viewPuzzleButton);
 
   const expectedPathname = "/puzzle2";
-  const expectedState = JSON.stringify({ puzzleUrl });
+  const expectedSearch = buildPuzzleSearch(puzzleUrl);
 
   expect(await screen.findByText("RouterTestComponent")).toBeInTheDocument();
   expect(screen.getByText(`pathname: ${expectedPathname}`)).toBeInTheDocument();
-  expect(screen.getByText(`state: ${expectedState}`)).toBeInTheDocument();
+  expect(screen.getByText(`search: ${expectedSearch}`)).toBeInTheDocument();
 
   return true;
 };

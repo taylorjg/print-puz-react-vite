@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 
 import { RouterTestComponent } from "@app/mocks/router-test-component";
+import { buildPuzzleSearch } from "@app/helpers";
 
 import { PuzzlePageNewPdfLayout } from "./puzzle-page-new-pdf-layout";
 
@@ -12,7 +13,7 @@ beforeEach(() => {
   user = userEvent.setup();
 });
 
-const myRender = (initialState) => {
+const myRender = (puzzleUrl) => {
   const routes = [
     { path: "/", element: <RouterTestComponent /> },
     { path: "/puzzle2", element: <PuzzlePageNewPdfLayout /> },
@@ -20,30 +21,27 @@ const myRender = (initialState) => {
   const initialEntries = [
     {
       pathname: "/puzzle2",
-      state: initialState,
+      search: puzzleUrl ? buildPuzzleSearch(puzzleUrl) : "",
     },
   ];
   const router = createMemoryRouter(routes, { initialEntries });
   return render(<RouterProvider router={router} />);
 };
 
-const renderPuzzlePageNewPdfLayout = async (initialState) => {
-  myRender(initialState);
+const renderPuzzlePageNewPdfLayout = async (puzzleUrl) => {
+  myRender(puzzleUrl);
 
-  if (!initialState?.puzzleUrl) {
+  if (!puzzleUrl) {
     await screen.findByRole("alert");
   }
 };
 
 describe("PuzzlePageNewPdfLayout happy path scenarios", () => {
   test("displays generated PDF", async () => {
-    await renderPuzzlePageNewPdfLayout({
-      puzzleUrl:
-        "https://www.private-eye.co.uk/pictures/crossword/download/753.puz",
-    });
-    expect(
-      await screen.findByTitle("Crossword puzzle")
-    ).toBeInTheDocument();
+    await renderPuzzlePageNewPdfLayout(
+      "https://www.private-eye.co.uk/pictures/crossword/download/753.puz"
+    );
+    expect(await screen.findByTitle("Crossword puzzle")).toBeInTheDocument();
   });
 });
 
@@ -57,10 +55,9 @@ describe("PuzzlePageNewPdfLayout error scenarios", () => {
   });
 
   it("read or parse failure", async () => {
-    await renderPuzzlePageNewPdfLayout({
-      puzzleUrl:
-        "https://www.private-eye.co.uk/pictures/crossword/download/bogus.puz",
-    });
+    await renderPuzzlePageNewPdfLayout(
+      "https://www.private-eye.co.uk/pictures/crossword/download/bogus.puz"
+    );
     expect(
       await screen.findByText("Failed to read or parse puzzle.")
     ).toBeInTheDocument();
