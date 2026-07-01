@@ -1,2 +1,1 @@
-export * from "./homepage";
 export * from "./puzzle-page";

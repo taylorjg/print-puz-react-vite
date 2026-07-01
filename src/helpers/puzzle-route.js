@@ -17,7 +17,7 @@ export const buildPuzzleSearch = (puzzleUrl) => {
   return `?crossword-url=${encodeURIComponent(puzzleUrl)}`;
 };
 
-export const buildPuzzlePath = (puzzleUrl, pathname = "/puzzle2") =>
+export const buildPuzzlePath = (puzzleUrl, pathname = "/puzzle") =>
   `${pathname}${buildPuzzleSearch(puzzleUrl)}`;
 
 export const puzzleUrlFromSearch = (search) => {

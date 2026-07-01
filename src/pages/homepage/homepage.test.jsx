@@ -22,7 +22,7 @@ const renderPage = async ({
 } = {}) => {
   const routes = [
     { path: "/", element: <HomePage /> },
-    { path: "/puzzle2", element: <RouterTestComponent /> },
+    { path: "/puzzle", element: <RouterTestComponent /> },
   ];
   const router = createMemoryRouter(routes);
   const view = renderWithTheme(<RouterProvider router={router} />);
@@ -56,7 +56,7 @@ const checkPageNavigation = async (section, puzzleUrl) => {
   const viewPuzzleButton = within(section).getByText("View Puzzle");
   await user.click(viewPuzzleButton);
 
-  const expectedPathname = "/puzzle2";
+  const expectedPathname = "/puzzle";
   const expectedSearch = buildPuzzleSearch(puzzleUrl);
 
   expect(await screen.findByText("RouterTestComponent")).toBeInTheDocument();

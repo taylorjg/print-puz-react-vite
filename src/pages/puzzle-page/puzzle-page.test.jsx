@@ -5,7 +5,7 @@ import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import { RouterTestComponent } from "@app/mocks/router-test-component";
 import { buildPuzzleSearch } from "@app/helpers";
 
-import { PuzzlePageNewPdfLayout } from "./puzzle-page-new-pdf-layout";
+import { PuzzlePage } from "./puzzle-page";
 
 let user;
 
@@ -16,11 +16,11 @@ beforeEach(() => {
 const myRender = (puzzleUrl) => {
   const routes = [
     { path: "/", element: <RouterTestComponent /> },
-    { path: "/puzzle2", element: <PuzzlePageNewPdfLayout /> },
+    { path: "/puzzle", element: <PuzzlePage /> },
   ];
   const initialEntries = [
     {
-      pathname: "/puzzle2",
+      pathname: "/puzzle",
       search: puzzleUrl ? buildPuzzleSearch(puzzleUrl) : "",
     },
   ];
@@ -28,7 +28,7 @@ const myRender = (puzzleUrl) => {
   return render(<RouterProvider router={router} />);
 };
 
-const renderPuzzlePageNewPdfLayout = async (puzzleUrl) => {
+const renderPuzzlePage = async (puzzleUrl) => {
   myRender(puzzleUrl);
 
   if (!puzzleUrl) {
@@ -36,18 +36,18 @@ const renderPuzzlePageNewPdfLayout = async (puzzleUrl) => {
   }
 };
 
-describe("PuzzlePageNewPdfLayout happy path scenarios", () => {
+describe("PuzzlePage happy path scenarios", () => {
   test("displays generated PDF", async () => {
-    await renderPuzzlePageNewPdfLayout(
+    await renderPuzzlePage(
       "https://www.private-eye.co.uk/pictures/crossword/download/753.puz"
     );
     expect(await screen.findByTitle("Crossword puzzle")).toBeInTheDocument();
   });
 });
 
-describe("PuzzlePageNewPdfLayout error scenarios", () => {
+describe("PuzzlePage error scenarios", () => {
   it("no puzzle specified", async () => {
-    await renderPuzzlePageNewPdfLayout();
+    await renderPuzzlePage();
     const alert = screen.getByRole("alert");
     expect(within(alert).getByText("No puzzle specified.")).toBeInTheDocument();
     await user.click(within(alert).getByText("Return Home"));
@@ -55,7 +55,7 @@ describe("PuzzlePageNewPdfLayout error scenarios", () => {
   });
 
   it("read or parse failure", async () => {
-    await renderPuzzlePageNewPdfLayout(
+    await renderPuzzlePage(
       "https://www.private-eye.co.uk/pictures/crossword/download/bogus.puz"
     );
     expect(

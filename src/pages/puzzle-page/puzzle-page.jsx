@@ -7,12 +7,9 @@ import { puzzleUrlFromSearch } from "@app/helpers";
 
 import { LoadingAlert, ErrorAlert } from "@app/components";
 import { generateCrosswordPdf } from "./generate-crossword-pdf";
-import {
-  StyledPdfFrame,
-  StyledPdfViewer,
-} from "./puzzle-page-new-pdf-layout.styles";
+import { StyledPdfFrame, StyledPdfViewer } from "./puzzle-page.styles";
 
-export const PuzzlePageNewPdfLayout = () => {
+export const PuzzlePage = () => {
   const { search } = useLocation();
   const navigate = useNavigate();
   const puzzleUrl = puzzleUrlFromSearch(search);

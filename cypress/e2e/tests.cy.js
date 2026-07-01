@@ -35,7 +35,7 @@ describe("happy path scenarios", () => {
 
 describe("error scenarios", () => {
   it("no puzzle specified", () => {
-    cy.visit("/#/puzzle2");
+    cy.visit("/#/puzzle");
     cy.findByRole("alert").within(() => {
       cy.findByText("No puzzle specified.");
       cy.findByText("Return Home").click();
@@ -55,7 +55,7 @@ describe("error scenarios", () => {
     cy.location("pathname").should("eq", "/print-puz-react-vite/");
     cy.location("hash").should(
       "eq",
-      "#/puzzle2?private-eye-crossword=bogus.puz"
+      "#/puzzle?private-eye-crossword=bogus.puz"
     );
     cy.findByRole("alert").within(() => {
       cy.findByText("Failed to read or parse puzzle.");

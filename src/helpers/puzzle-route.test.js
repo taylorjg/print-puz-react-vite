@@ -12,7 +12,7 @@ describe("puzzle-route", () => {
       "https://www.private-eye.co.uk/pictures/crossword/download/833.puz";
     expect(buildPuzzleSearch(puzzleUrl)).toBe("?private-eye-crossword=833.puz");
     expect(buildPuzzlePath(puzzleUrl)).toBe(
-      "/puzzle2?private-eye-crossword=833.puz"
+      "/puzzle?private-eye-crossword=833.puz"
     );
     expect(puzzleUrlFromSearch("?private-eye-crossword=833.puz")).toBe(
       puzzleUrl
