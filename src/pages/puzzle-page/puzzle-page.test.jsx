@@ -41,7 +41,7 @@ describe("PuzzlePage happy path scenarios", () => {
     await renderPuzzlePage(
       "https://www.private-eye.co.uk/pictures/crossword/download/753.puz"
     );
-    expect(await screen.findByTitle("Crossword puzzle")).toBeInTheDocument();
+    expect(await screen.findByTitle("Crossword")).toBeInTheDocument();
   });
 });
 

@@ -190,6 +190,7 @@ const drawClueColumn = (ensurePage, clues, column, startY, font) => {
 
 export const generateCrosswordPdf = async (parsedPuzzle) => {
   const pdfDoc = await PDFDocument.create();
+  pdfDoc.setTitle("Crossword", { showInWindowTitleBar: true });
   const pages = [pdfDoc.addPage([PDF_PAGE.width, PDF_PAGE.height])];
   const ensurePage = (index) => {
     while (pages.length <= index) {

@@ -29,8 +29,10 @@ export const PuzzlePage = () => {
       try {
         const parsedPuzzle = await parsePuzzle(puzzleUrl);
         const pdfBytes = await generateCrosswordPdf(parsedPuzzle);
-        const blob = new Blob([pdfBytes], { type: "application/pdf" });
-        const url = URL.createObjectURL(blob);
+        const file = new File([pdfBytes], "Crossword.pdf", {
+          type: "application/pdf",
+        });
+        const url = URL.createObjectURL(file);
         pdfUrlRef.current = url;
         setPdfUrl(url);
       } catch (error) {
@@ -86,7 +88,7 @@ export const PuzzlePage = () => {
         }}
       />
       <StyledPdfViewer>
-        <StyledPdfFrame src={`${pdfUrl}#view=Fit`} title="Crossword puzzle" />
+        <StyledPdfFrame src={`${pdfUrl}#view=Fit`} title="Crossword" />
       </StyledPdfViewer>
     </>
   );

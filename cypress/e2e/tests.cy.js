@@ -5,7 +5,7 @@ describe("happy path scenarios", () => {
       cy.findByDisplayValue(/.puz$/);
       cy.findByText("View Puzzle").click();
     });
-    cy.findByTitle("Crossword puzzle");
+    cy.findByTitle("Crossword");
   });
 
   it("select a puzzle url from the list", () => {
@@ -18,7 +18,7 @@ describe("happy path scenarios", () => {
       .trigger("mousedown", { button: 0 });
     cy.findByRole("listbox").findByText("725.puz (Tue Mar 29 2022)").click();
     cy.findByTestId("puzzle-list").findByText("View Puzzle").click();
-    cy.findByTitle("Crossword puzzle");
+    cy.findByTitle("Crossword");
   });
 
   it("enter an explicit puzzle url", () => {
@@ -29,7 +29,7 @@ describe("happy path scenarios", () => {
       );
       cy.findByText("View Puzzle").click();
     });
-    cy.findByTitle("Crossword puzzle");
+    cy.findByTitle("Crossword");
   });
 });
 
