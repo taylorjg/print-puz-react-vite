@@ -38,7 +38,10 @@ export const PuzzlePage = () => {
           return;
         }
         const { width, height } = parsedPuzzle.puzzle;
-        if (width !== SUPPORTED_PUZZLE_SIZE || height !== SUPPORTED_PUZZLE_SIZE) {
+        if (
+          width !== SUPPORTED_PUZZLE_SIZE ||
+          height !== SUPPORTED_PUZZLE_SIZE
+        ) {
           setErrorMessage(unsupportedPuzzleSizeMessage(width, height));
           return;
         }
