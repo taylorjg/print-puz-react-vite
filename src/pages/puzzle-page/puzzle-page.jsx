@@ -2,12 +2,17 @@ import { useEffect, useRef, useState } from "react";
 import { Global } from "@emotion/react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { parsePuzzle, extractErrorMessage } from "@app/serverless";
+import { parsePuzzle } from "@app/serverless";
 import { puzzleUrlFromSearch } from "@app/helpers";
 
 import { LoadingAlert, ErrorAlert } from "@app/components";
 import { generateCrosswordPdf } from "./generate-crossword-pdf";
 import { StyledPdfFrame, StyledPdfViewer } from "./puzzle-page.styles";
+
+const SUPPORTED_PUZZLE_SIZE = 15;
+
+const unsupportedPuzzleSizeMessage = (width, height) =>
+  `Unsupported puzzle size (${width}×${height}). Only 15×15 puzzles are supported.`;
 
 export const PuzzlePage = () => {
   const { search } = useLocation();
@@ -28,6 +33,15 @@ export const PuzzlePage = () => {
       if (!puzzleUrl) return;
       try {
         const parsedPuzzle = await parsePuzzle(puzzleUrl);
+        if (!parsedPuzzle?.puzzle) {
+          setErrorMessage("Failed to read or parse puzzle.");
+          return;
+        }
+        const { width, height } = parsedPuzzle.puzzle;
+        if (width !== SUPPORTED_PUZZLE_SIZE || height !== SUPPORTED_PUZZLE_SIZE) {
+          setErrorMessage(unsupportedPuzzleSizeMessage(width, height));
+          return;
+        }
         const pdfBytes = await generateCrosswordPdf(parsedPuzzle);
         const file = new File([pdfBytes], "Crossword.pdf", {
           type: "application/pdf",
@@ -35,8 +49,8 @@ export const PuzzlePage = () => {
         const url = URL.createObjectURL(file);
         pdfUrlRef.current = url;
         setPdfUrl(url);
-      } catch (error) {
-        setErrorMessage(extractErrorMessage(error));
+      } catch {
+        setErrorMessage("Failed to read or parse puzzle.");
       } finally {
         setLoading(false);
       }
@@ -68,7 +82,7 @@ export const PuzzlePage = () => {
   if (errorMessage || !pdfUrl) {
     return (
       <ErrorAlert
-        message="Failed to read or parse puzzle."
+        message={errorMessage ?? "Failed to read or parse puzzle."}
         onReturnHome={onReturnHome}
       />
     );

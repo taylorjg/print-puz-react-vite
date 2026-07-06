@@ -62,4 +62,18 @@ describe("PuzzlePage error scenarios", () => {
       await screen.findByText("Failed to read or parse puzzle.")
     ).toBeInTheDocument();
   });
+
+  it("unsupported puzzle size", async () => {
+    await renderPuzzlePage(
+      "https://www.private-eye.co.uk/pictures/crossword/download/wrong-size.puz"
+    );
+    expect(
+      await screen.findByText(
+        "Unsupported puzzle size (13×13). Only 15×15 puzzles are supported."
+      )
+    ).toBeInTheDocument();
+    const alert = screen.getByRole("alert");
+    await user.click(within(alert).getByText("Return Home"));
+    expect(await screen.findByText("RouterTestComponent")).toBeInTheDocument();
+  });
 });
