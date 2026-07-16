@@ -163,7 +163,7 @@ ESLint 9+ expects **flat config** (`eslint.config.js`). `.eslintrc.cjs` would ne
 
 Also update CI while here:
 
-- ~~`.github/workflows/ci.yml`: Node 18.16 → 20 LTS~~ **Done:** Node 24, `actions/checkout@v4`, `setup-node@v4`, `cypress/browsers:24.14.0`
+- ~~`.github/workflows/ci-cd.yml`: Node 18.16 → 20 LTS~~ **Done:** Node 24, `actions/checkout@v4`, `setup-node@v4`, `cypress/browsers:24.14.0`
 
 **Effort:** Days, not hours  
 **Risk:** High

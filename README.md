@@ -1,4 +1,4 @@
-![CI workflow badge](https://github.com/taylorjg/print-puz-react-vite/actions/workflows/ci.yml/badge.svg)
+![CI/CD workflow badge](https://github.com/taylorjg/print-puz-react-vite/actions/workflows/ci-cd.yml/badge.svg)
 
 # Description
 
