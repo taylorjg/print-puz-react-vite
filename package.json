@@ -59,5 +59,10 @@
     "eslint-plugin-react": {
       "eslint": "$eslint"
     }
+  },
+  "allowScripts": {
+    "cypress@15.18.1": true,
+    "fsevents@2.3.3": true,
+    "msw@2.15.0": true
   }
 }
