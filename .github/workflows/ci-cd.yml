@@ -5,34 +5,32 @@ on:
 
 jobs:
   run-unit-tests:
-    name: Run Unit Tests
-    runs-on: ubuntu-24.04
+    name: Run lint check and unit tests
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
         with:
-          node-version: "24"
+          node-version-file: ".nvmrc"
       - name: Clean install
         run: npm clean-install
-      - name: Lint
+      - name: Run lint check
         run: npm run lint
       - name: Run unit tests
         run: npm test
 
   run-e2e-tests:
-    name: Run End-to-End Tests
-    runs-on: ubuntu-24.04
-    container:
-      image: cypress/browsers:24.17.0
-      options: --user 1001
+    name: Run end-to-end tests
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: ".nvmrc"
       - uses: cypress-io/github-action@v7
         with:
-          install-command: npm clean-install
-          build: npm run build
-          start: npm run preview
-          # Preview serves dist on 0.0.0.0:5173 (see vite.config.js).
+          start: npm run dev
+          # The "wait-on" value needs to match "baseUrl" in cypress.config.js.
           wait-on: "http://localhost:5173/print-puz-react-vite/"
           browser: chrome
 
@@ -40,14 +38,14 @@ jobs:
     name: Deploy to gh-pages
     if: github.ref_type == 'tag'
     needs: [run-unit-tests, run-e2e-tests]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
         with:
-          node-version: "24"
+          node-version-file: ".nvmrc"
       - name: Clean install
         run: npm clean-install
       - name: Build
