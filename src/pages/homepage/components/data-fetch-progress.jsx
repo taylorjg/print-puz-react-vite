@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { Error as ErrorIcon } from "@mui/icons-material";
 import { CircularProgress } from "@mui/material";
-import ErrorIcon from "@mui/icons-material/Error";
 
 import PropTypes from "prop-types";
 
