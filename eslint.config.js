@@ -10,7 +10,7 @@ import cypress from "eslint-plugin-cypress";
 
 export default [
   {
-    ignores: ["dist/**"],
+    ignores: ["dist/**", "node_modules/**"],
   },
   js.configs.recommended,
   eslintConfigPrettier,
