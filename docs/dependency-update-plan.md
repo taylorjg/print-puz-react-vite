@@ -7,14 +7,14 @@ Plan for bringing outdated dependencies up to date, ordered from easiest to hard
 
 ## Current Snapshot
 
-| Area | Installed | Latest | Gap |
-|------|-----------|--------|-----|
-| Build/test | Vite 4, Vitest 0.31 | Vite 8, Vitest 4 | Large, coupled |
-| React stack | React 18.2 | React 19 | Major |
-| UI | MUI 5.13 | MUI 9 | Major |
-| Lint/format | ESLint 8, Prettier 2 | ESLint 10, Prettier 3 | Major |
-| Mocking | MSW 1.2 (`rest` API) | MSW 2 | API rewrite |
-| E2E | Cypress 12 | Cypress 15 | Major |
+| Area        | Installed            | Latest                | Gap            |
+| ----------- | -------------------- | --------------------- | -------------- |
+| Build/test  | Vite 4, Vitest 0.31  | Vite 8, Vitest 4      | Large, coupled |
+| React stack | React 18.2           | React 19              | Major          |
+| UI          | MUI 5.13             | MUI 9                 | Major          |
+| Lint/format | ESLint 8, Prettier 2 | ESLint 10, Prettier 3 | Major          |
+| Mocking     | MSW 1.2 (`rest` API) | MSW 2                 | API rewrite    |
+| E2E         | Cypress 12           | Cypress 15            | Major          |
 
 **Note:** Project targets **Node 24** (`.nvmrc` and CI). Use `nvm use` before running tests locally.
 
@@ -54,11 +54,11 @@ This updates ~25 packages with minimal risk:
 
 These won't move with `npm update` because semver ranges cap them:
 
-| Package | Current range | Bump to | Why it's easy |
-|---------|---------------|---------|---------------|
-| `eslint-plugin-react-refresh` | `^0.3.4` | `^0.4.26` | Latest compatible with ESLint 8 (`0.5.x` needs ESLint 9 — defer to Phase 6) |
-| `@testing-library/cypress` | `^9.0.0` | `^10.1.3` | Test helper only |
-| `gh-pages` | `^5.0.0` | `^6.3.0` | Deploy script unchanged (`gh-pages -d dist`) |
+| Package                       | Current range | Bump to   | Why it's easy                                                               |
+| ----------------------------- | ------------- | --------- | --------------------------------------------------------------------------- |
+| `eslint-plugin-react-refresh` | `^0.3.4`      | `^0.4.26` | Latest compatible with ESLint 8 (`0.5.x` needs ESLint 9 — defer to Phase 6) |
+| `@testing-library/cypress`    | `^9.0.0`      | `^10.1.3` | Test helper only                                                            |
+| `gh-pages`                    | `^5.0.0`      | `^6.3.0`  | Deploy script unchanged (`gh-pages -d dist`)                                |
 
 **Effort:** ~30 minutes  
 **Risk:** Low
@@ -67,10 +67,10 @@ These won't move with `npm update` because semver ranges cap them:
 
 ## Phase 3 — Medium: Test Environment Fixes
 
-| Package | From → To | Notes |
-|---------|-----------|-------|
-| `jsdom` | 22 → 29 | **29.1.1** with Vitest 4 + Node 24 (fails on Node 18 with `ERR_REQUIRE_ESM`) |
-| `prettier` | 2 → 3 | Run `npx prettier --write .` once; also bump `eslint-plugin-prettier` to ^5 |
+| Package    | From → To | Notes                                                                        |
+| ---------- | --------- | ---------------------------------------------------------------------------- |
+| `jsdom`    | 22 → 29   | **29.1.1** with Vitest 4 + Node 24 (fails on Node 18 with `ERR_REQUIRE_ESM`) |
+| `prettier` | 2 → 3     | Run `npx prettier --write .` once; also bump `eslint-plugin-prettier` to ^5  |
 
 Do these **before** the Vite/Vitest jump so there is a stable test baseline.
 
@@ -154,12 +154,12 @@ ESLint 9+ expects **flat config** (`eslint.config.js`). `.eslintrc.cjs` would ne
 
 ## Phase 7 — Hard: Framework Majors (save for last)
 
-| Upgrade | Impact |
-|---------|--------|
-| React 18 → 19 | `@types/react` 19, possible test/library updates |
-| react-router 6 → 7 | Route APIs, loader patterns |
-| MUI 5 → 9 | Large UI breaking changes (or stop at MUI 6 first) |
-| Cypress 12 → 15 | Config, browser support, CI container update |
+| Upgrade            | Impact                                             |
+| ------------------ | -------------------------------------------------- |
+| React 18 → 19      | `@types/react` 19, possible test/library updates   |
+| react-router 6 → 7 | Route APIs, loader patterns                        |
+| MUI 5 → 9          | Large UI breaking changes (or stop at MUI 6 first) |
+| Cypress 12 → 15    | Config, browser support, CI container update       |
 
 Also update CI while here:
 
@@ -184,12 +184,12 @@ flowchart LR
 
 ## Progress Tracking
 
-| Phase | Status | PR / notes |
-|-------|--------|------------|
-| 1 — `npm update` | Done | `package-lock.json` only; build + lint pass; MUI 5.18 Select uses `combobox` role — fixed in `HomePage.test.jsx` |
-| 2 — Minor range bumps | Done | `eslint-plugin-react-refresh` capped at `0.4.26` (ESLint 8); `@testing-library/cypress` 10.1.3; `gh-pages` 6.3.0 |
-| 3 — jsdom + prettier | Done | prettier 3.8 + eslint-plugin-prettier 5.5; jsdom now 29.1.1 (see Node 24 bump) |
-| 4 — Vite/Vitest | Done | Vite 6.4 + Vitest 4.1 + plugin-react 4.7 + jsdom 29; Node 24 in `.nvmrc`/CI; `vitest/config` in vite.config.js |
-| 5 — MSW 2 | Done | `rest` → `http` + `HttpResponse`; wildcard URL patterns for API host |
-| 6 — ESLint flat config | Done | ESLint 9.39 flat config; `@vitest/eslint-plugin` replaces vitest plugins; react-hooks 5.2 |
-| 7 — Framework majors | Done | React **19.2.7**; **react-router-dom 7.18**; **MUI 9.1**; **Cypress 15.18**; CI `cypress/browsers:24.17.0` |
+| Phase                  | Status | PR / notes                                                                                                       |
+| ---------------------- | ------ | ---------------------------------------------------------------------------------------------------------------- |
+| 1 — `npm update`       | Done   | `package-lock.json` only; build + lint pass; MUI 5.18 Select uses `combobox` role — fixed in `HomePage.test.jsx` |
+| 2 — Minor range bumps  | Done   | `eslint-plugin-react-refresh` capped at `0.4.26` (ESLint 8); `@testing-library/cypress` 10.1.3; `gh-pages` 6.3.0 |
+| 3 — jsdom + prettier   | Done   | prettier 3.8 + eslint-plugin-prettier 5.5; jsdom now 29.1.1 (see Node 24 bump)                                   |
+| 4 — Vite/Vitest        | Done   | Vite 6.4 + Vitest 4.1 + plugin-react 4.7 + jsdom 29; Node 24 in `.nvmrc`/CI; `vitest/config` in vite.config.js   |
+| 5 — MSW 2              | Done   | `rest` → `http` + `HttpResponse`; wildcard URL patterns for API host                                             |
+| 6 — ESLint flat config | Done   | ESLint 9.39 flat config; `@vitest/eslint-plugin` replaces vitest plugins; react-hooks 5.2                        |
+| 7 — Framework majors   | Done   | React **19.2.7**; **react-router-dom 7.18**; **MUI 9.1**; **Cypress 15.18**; CI `cypress/browsers:24.17.0`       |

@@ -9,9 +9,9 @@ Assessment and plan for switching this repo from JavaScript to TypeScript.
 
 **Not a huge deal.** For ~1,500 lines and a focused app (homepage → fetch puzzle → render/print PDF), this is a **small migration** — comfortably **weekend-scale**, likely toward the **lower end** of a 1–2 day estimate.
 
-| Approach | Effort |
-|----------|--------|
-| Minimal (tooling + rename + fix errors, `strict: false`) | ~half a day |
+| Approach                                                       | Effort                                                    |
+| -------------------------------------------------------------- | --------------------------------------------------------- |
+| Minimal (tooling + rename + fix errors, `strict: false`)       | ~half a day                                               |
 | Solid (shared puzzle/API types, `strict: true`, tests passing) | ~1 day, maybe a bit more if PDF layout typing gets fiddly |
 
 The payoff is strongest if you plan to keep evolving the PDF layout and API integration. If the app is mostly stable, staying on JavaScript is also reasonable.
@@ -20,14 +20,14 @@ The payoff is strongest if you plan to keep evolving the PDF layout and API inte
 
 ## Current Codebase Size
 
-| Area | Files | Notes |
-|------|-------|-------|
-| `src/` total | ~36 JS/JSX files | |
-| `src/pages/puzzle-page/` | 10 files (~600 lines) | PDF generation + viewer |
-| `src/pages/homepage/` | ~8 files | Home / puzzle selection UI |
-| Shared (`components`, `helpers`, `mocks`, etc.) | ~12 files | |
-| Cypress + configs | ~5 files | |
-| **Total** | **~41 files, ~1,500 lines** | |
+| Area                                            | Files                       | Notes                      |
+| ----------------------------------------------- | --------------------------- | -------------------------- |
+| `src/` total                                    | ~36 JS/JSX files            |                            |
+| `src/pages/puzzle-page/`                        | 10 files (~600 lines)       | PDF generation + viewer    |
+| `src/pages/homepage/`                           | ~8 files                    | Home / puzzle selection UI |
+| Shared (`components`, `helpers`, `mocks`, etc.) | ~12 files                   |                            |
+| Cypress + configs                               | ~5 files                    |                            |
+| **Total**                                       | **~41 files, ~1,500 lines** |                            |
 
 There is **one** puzzle page: `src/pages/puzzle-page/`, exported via `src/pages/index.js` and wired in `main.jsx`. Legacy layout folders (`puzzle-page-old-html-layout`, `puzzle-page-new-pdf-layout`) are gone.
 
